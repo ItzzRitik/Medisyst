@@ -164,7 +164,6 @@ public class HomeActivity extends AppCompatActivity {
         display.addItemDecoration(new GridSpacingItemDecoration(1,dptopx(10),true));
         display.setItemAnimator(new DefaultItemAnimator());
 
-
         if(getIntent().getBooleanExtra("isProfile",false))
         {
             splash_cover.setVisibility(View.GONE);

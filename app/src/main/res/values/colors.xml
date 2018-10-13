@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff611c</color>
-    <color name="colorPrimaryDark">#ff611c</color>
-    <color name="colorAccent">#ff611c</color>
-    <color name="splash">#99ff611c</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#ffffff</color>
+    <color name="splash">#ffffff</color>
     <color name="ripple">#ff8b59</color>
 
     <color name="colorPrimary1">#02723b</color>

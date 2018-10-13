@@ -135,7 +135,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override public void afterTextChanged(Editable editable) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(symptom_edit.getAllChips().size()==0 && symptom_edit.getText() == null){
+                if(symptom_edit.getAllChips().size()!=0 || !symptom_edit.getText().toString().equals("")){
                     symptoms_tag.setVisibility(View.VISIBLE);
                 }
                 else {

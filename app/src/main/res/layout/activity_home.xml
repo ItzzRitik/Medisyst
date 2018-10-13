@@ -92,6 +92,7 @@
                             android:layout_marginEnd="15dp"
                             android:layout_marginTop="15dp"
                             android:textSize="20sp"
+                            android:visibility="gone"
                             android:text="@string/symptoms_tag"/>
                         <com.hootsuite.nachos.NachoTextView
                             android:id="@+id/symptom_edit"
@@ -106,10 +107,7 @@
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
                             android:hint="@string/enter_symptoms"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_margin="15dp"
                             android:layout_below="@+id/symptoms_tag"
                             app:chipBackground="@color/colorPrimary"
                             app:chipTextColor ="@color/colorAccentLight"

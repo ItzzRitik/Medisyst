@@ -70,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
     String buttonText="NEXT";
     OkHttpClient client;
     ProgressBar nextLoad;
-    float scale=1.02f;
     @Override
     public void onBackPressed() {
         showKeyboard(email,false);
@@ -281,7 +280,6 @@ public class LoginActivity extends AppCompatActivity {
 
         setButtonEnabled(false);logo_div.setVisibility(View.VISIBLE);
         ico_splash.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_initialgrow));
-        pulseAnimation();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -299,28 +297,6 @@ public class LoginActivity extends AppCompatActivity {
                 }},800);
             }},1500);
     }
-    private void pulseAnimation(){
-        ico_splash.animate().scaleXBy(scale).scaleYBy(scale).setDuration(500).setListener(scaleUpListener);
-    }
-    private final Animator.AnimatorListener scaleUpListener = new Animator.AnimatorListener() {
-
-        @Override public void onAnimationStart(Animator animation) {}
-        @Override public void onAnimationRepeat(Animator animation) {}
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            ico_splash.animate().scaleXBy(-scale).scaleYBy(-scale).setDuration(500).setListener(scaleDownListener);
-        }
-        @Override public void onAnimationCancel(Animator animation) {}
-    };
-    private final Animator.AnimatorListener scaleDownListener = new Animator.AnimatorListener() {
-        @Override public void onAnimationStart(Animator animation) {}
-        @Override  public void onAnimationRepeat(Animator animation) {}
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            ico_splash.animate().scaleXBy(scale).scaleYBy(scale).setDuration(500 * 2).setListener(scaleUpListener);
-        }
-        @Override public void onAnimationCancel(Animator animation) {}
-    };
     public void performSignIn()
     {
         showKeyboard(email,false);

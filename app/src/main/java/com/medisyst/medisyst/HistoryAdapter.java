@@ -18,7 +18,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
     private int[] thumb={R.drawable.h1,R.drawable.h2,R.drawable.h3,R.drawable.h4,
             R.drawable.h5,R.drawable.h6,R.drawable.h7,R.drawable.h8};
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name,date,prof_name,solution;
+        TextView name,date,prof_name,doc_name,solution;
         LinearLayout cardItem;
         ImageView thumbnail;
         MyViewHolder(View view) {
@@ -31,6 +31,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
             prof_name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             solution = view.findViewById(R.id.solution);
             solution.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
+            doc_name= view.findViewById(R.id.doc_name);
+            doc_name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             thumbnail = view.findViewById(R.id.thumbnail);
             cardItem = view.findViewById(R.id.cardItem);
         }
@@ -54,6 +56,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         holder.date.setText(item.getDate());
         holder.prof_name.setText(item.getProfName());
         holder.solution.setText(item.getSolution());
+        holder.doc_name.setText(item.getdocName());
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

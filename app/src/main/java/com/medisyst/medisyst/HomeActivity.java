@@ -170,14 +170,13 @@ public class HomeActivity extends AppCompatActivity {
                     anims.setDuration(1000);
                     anims.setFillAfter(true);
                     anims.setInterpolator(new AccelerateDecelerateInterpolator());
-
                     logo_div.startAnimation(anims);
                     startAnim.start();
                     ico_splash.animate().scaleX(0f).scaleY(0f).setDuration(1000).start();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            scaleY(data_div,pxtodp(splash_cover.getHeight())-90,800,new AccelerateDecelerateInterpolator());
+                            scaleY(data_div,pxtodp(splash_cover.getHeight())-85,800,new AccelerateDecelerateInterpolator());
                             AlphaAnimation anims = new AlphaAnimation(1,0);anims.setDuration(700);anims.setFillAfter(true);
                             ico_splash.startAnimation(anims);
                         }},10);

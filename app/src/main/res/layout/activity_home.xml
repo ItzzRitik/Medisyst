@@ -88,6 +88,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorAccent"
                             android:textCursorDrawable="@drawable/cursor"
+                            android:background="@drawable/symptom_field"
                             app:chipBackground="@color/colorAccentLight"
                             app:chipTextColor ="#fffbfb"
                             app:chipTextSize="16dp"

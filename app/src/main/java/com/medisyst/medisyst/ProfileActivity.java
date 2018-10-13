@@ -240,8 +240,8 @@ public class ProfileActivity extends AppCompatActivity {
         options.setShowCropFrame(false);
         options.setCropGridColumnCount(0);
         options.setCropGridRowCount(0);
-        options.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        options.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        options.setToolbarColor(ContextCompat.getColor(this, R.color.colorAccentDark));
+        options.setStatusBarColor(ContextCompat.getColor(this, R.color.colorAccentDark));
         options.setActiveWidgetColor(ContextCompat.getColor(this, R.color.colorPrimary));
 
         profile_url=new File(new ContextWrapper(getApplicationContext()).getDir("imageDir", Context.MODE_PRIVATE),"profile.jpg").getAbsolutePath();
@@ -385,7 +385,6 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.e("Camera", "onPictureTaken: " );
                 Matrix matrix = new Matrix();
                 matrix.postRotate(90);
-                matrix.postScale(-1, 1, result.getWidth()/2, result.getHeight()/2);
                 result= Bitmap.createBitmap(result, 0, 0, result.getWidth(), result.getHeight(), matrix, true);
                 vibrate(20);
                 profile_path = MediaStore.Images.Media.insertImage(ProfileActivity.this.getContentResolver(), result, "Title", null);
@@ -499,6 +498,8 @@ public class ProfileActivity extends AppCompatActivity {
                     final Uri resultUri = UCrop.getOutput(intent);
                     Bitmap bitmap= MediaStore.Images.Media.getBitmap(ProfileActivity.this.getContentResolver(), resultUri);
                     profile.setImageBitmap(bitmap);dp_cover.setImageBitmap(bitmap);profile_dp=bitmap;isDP_added=true;
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    getWindow().setStatusBarColor(Color.WHITE);
                     closeCam();
                     new File(getRealPathFromURI(ProfileActivity.this,Uri.parse(profile_path))).delete();
                 }
@@ -506,7 +507,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
             else if (resultcode == UCrop.RESULT_ERROR) {
                 final Throwable cropError = UCrop.getError(intent);
-                Toast.makeText(ProfileActivity.this,getString(R.string.error)+cropError, Toast.LENGTH_LONG).show();
                 new File(getRealPathFromURI(ProfileActivity.this,Uri.parse(profile_path))).delete();
             }
         }

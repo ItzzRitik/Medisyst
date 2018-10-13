@@ -80,6 +80,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/diagnosis"
                         android:visibility="gone"
+                        android:elevation="10dp"
                         android:background="@color/colorAccent">
 
                     </RelativeLayout>

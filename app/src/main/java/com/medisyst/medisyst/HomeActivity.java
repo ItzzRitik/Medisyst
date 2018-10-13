@@ -2,6 +2,7 @@ package com.medisyst.medisyst;
 
 
 import android.animation.Animator;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -152,6 +153,20 @@ public class HomeActivity extends AppCompatActivity {
                         ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy, add.getWidth(), finalRadius).start();
                     }
                 });
+                int colorFrom = getResources().getColor(R.color.colorAccent);
+                int colorTo = getResources().getColor(R.color.colorPrimary);
+                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                colorAnimation.setDuration(300);
+                colorAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animator) {
+                        data_div.setBackgroundColor((int) animator.getAnimatedValue());
+                    }
+
+                });
+                colorAnimation.start();
                 startAnim.start();
             }
         });

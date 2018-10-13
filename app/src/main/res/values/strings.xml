@@ -63,6 +63,7 @@
     <string name="diagnosis">Diagnosis</string>
     <string name="symptoms_tag">Symptoms</string>
     <string name="doc_name">Doctor\'s Name</string>
+    <string name="results">Results</string>
 </resources>
 
 

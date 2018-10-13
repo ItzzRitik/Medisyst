@@ -89,7 +89,6 @@
                             android:textAllCaps="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginStart="25dp"
-                            android:layout_marginEnd="15dp"
                             android:layout_marginTop="15dp"
                             android:textSize="20sp"
                             android:visibility="gone"
@@ -145,13 +144,15 @@
                             android:src="@drawable/calendar"/>
                         <RelativeLayout
                             android:layout_width="210dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="20dp"
+                            android:id="@+id/gender_pane"
+                            android:layout_marginBottom="15dp"
                             android:layout_below="@+id/dob">
                             <TextView
                                 android:layout_width="100dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="40dp"
                                 android:textAlignment="textEnd"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginStart="-15dp"
@@ -175,6 +176,22 @@
                                 app:switchToggleCheckedImage="@drawable/male"
                                 app:switchToggleNotCheckedColor="@color/gender_female"
                                 app:switchToggleNotCheckedImage="@drawable/female"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="470dp"
+                            android:background="@drawable/symptom_result"
+                            android:layout_margin="15dp"
+                            android:layout_below="@+id/gender_pane">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:textAllCaps="true"
+                                android:text="@string/results"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="15dp"
+                                android:textSize="20sp"/>
                         </RelativeLayout>
                     </RelativeLayout>
                 </RelativeLayout>

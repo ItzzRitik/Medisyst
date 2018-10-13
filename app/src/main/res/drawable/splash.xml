@@ -3,9 +3,9 @@
         android:left="0dp" android:right="0dp">
         <bitmap android:src="@mipmap/icon" />
     </item>
-    <item android:drawable="@color/colorPrimary2" />
+    <item android:drawable="@color/colorPrimary" />
     <item
-        android:left="125dp" android:right="125dp">
+        android:left="125dp" android:right="125dp" android:top="20dp">
         <bitmap  android:gravity="center" android:src="@mipmap/icon" />
     </item>
 </layer-list>

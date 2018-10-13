@@ -280,7 +280,6 @@ public class LoginActivity extends AppCompatActivity {
             public void run() {
                 // Splash Animation
                 anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
-                anim.setInterpolator(new OvershootInterpolator());
                 splash_cover.setVisibility(View.GONE);
                 Animation anima = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal);
                 logo_div.setVisibility(View.VISIBLE);logo_div.startAnimation(anima);ico_splash.startAnimation(anim);

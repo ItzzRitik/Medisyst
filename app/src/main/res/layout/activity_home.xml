@@ -86,19 +86,18 @@
                             android:id="@+id/symptom_edit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:minHeight="100dp"
-                            android:lines="3"
                             android:textColor="@color/colorAccent"
                             android:textCursorDrawable="@drawable/cursor"
                             android:background="@drawable/symptom_field"
                             android:padding="10dp"
-                            app:chipBackground="@color/colorAccentLight"
-                            app:chipTextColor ="#fffbfb"
+                            android:hint="@string/enter_symptoms"
+                            app:chipBackground="@color/colorPrimary"
+                            app:chipTextColor ="@color/colorAccentLight"
                             app:chipTextSize="16dp"
                             app:chipHeight="30dp"
                             app:chipSpacing="5dp"
                             app:chipVerticalSpacing="5dp"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="15dp"/>
                     </RelativeLayout>
                 </RelativeLayout>
             </android.support.v4.widget.SwipeRefreshLayout>

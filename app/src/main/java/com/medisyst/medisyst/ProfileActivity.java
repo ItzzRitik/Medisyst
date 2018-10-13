@@ -126,7 +126,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         screenSize = new Point();
         getWindowManager().getDefaultDisplay().getSize(screenSize);
         diagonal=Math.sqrt((screenSize.x*screenSize.x) + (screenSize.y*screenSize.y));

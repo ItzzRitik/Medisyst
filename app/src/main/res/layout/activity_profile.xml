@@ -262,7 +262,7 @@
             android:layout_marginStart="85dp"
             android:visibility="invisible"
             android:textSize="28sp"
-            android:textColor="#fff"/>
+            android:textColor="#222"/>
     </RelativeLayout>
 
     <RelativeLayout

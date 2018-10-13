@@ -145,9 +145,10 @@ public class HomeActivity extends AppCompatActivity {
                     @Override public void onAnimationCancel(Animator animator) {}
                     @Override public void onAnimationRepeat(Animator animator) {}
                     @Override public void onAnimationEnd(Animator animator) {
-                        int cx = diagnosis.getRight();
-                        int cy = diagnosis.getBottom();
-                        int finalRadius = Math.max(diagnosis.getWidth(), diagnosis.getHeight());
+                        diagnosis.setVisibility(View.VISIBLE);
+                        int cx = data_div.getWidth()/2;
+                        int cy = data_div.getHeight()/2;
+                        int finalRadius = Math.max(data_div.getWidth(), data_div.getHeight());
                         ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy, add.getWidth(), finalRadius).start();
                     }
                 });

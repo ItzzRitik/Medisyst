@@ -123,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
         dob=findViewById(R.id.dob);
         dob.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
         symptoms_tag=findViewById(R.id.symptoms_tag);
-        symptoms_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2_bold.otf"));
+        symptoms_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
 
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);

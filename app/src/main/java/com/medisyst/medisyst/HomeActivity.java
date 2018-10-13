@@ -36,6 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hootsuite.nachos.NachoTextView;
+import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
 import com.tomergoldst.tooltips.ToolTipsManager;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -120,6 +121,8 @@ public class HomeActivity extends AppCompatActivity {
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);
         symptom_edit.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        symptom_edit.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
+        symptom_edit.addChipTerminator(' ', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_TO_TERMINATOR);
         add = findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

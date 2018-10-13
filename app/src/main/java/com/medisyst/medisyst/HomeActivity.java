@@ -54,7 +54,7 @@ import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
     RelativeLayout logo_div,splash_cover,diagnosis;
-    ImageView ico_splash,menu,search;
+    ImageView ico_splash,menu,done;
     TextView page_tag;
     Animator animator;
     CardView data_div;
@@ -100,8 +100,8 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-        search=findViewById(R.id.search);
-        search.setOnClickListener(new View.OnClickListener() {
+        done=findViewById(R.id.done);
+        done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -143,6 +143,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override public void onAnimationRepeat(Animator animator) {}
                     @Override public void onAnimationEnd(Animator animator) {
                         page_tag.setText(R.string.diagnosis);
+                        done.setVisibility(View.VISIBLE);
                         diagnosis.setVisibility(View.VISIBLE);
                         int cx = data_div.getWidth()/2;
                         int cy = data_div.getHeight()/2;
@@ -183,7 +184,6 @@ public class HomeActivity extends AppCompatActivity {
             logo_div.setVisibility(View.VISIBLE);
             page_tag.setVisibility(View.VISIBLE);
             menu.setVisibility(View.VISIBLE);
-            search.setVisibility(View.VISIBLE);
             scaleY(data_div,getIntent().getIntExtra("divHeight",0),0,new AccelerateDecelerateInterpolator());
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -234,7 +234,7 @@ public class HomeActivity extends AppCompatActivity {
                             AlphaAnimation anims = new AlphaAnimation(0,1);anims.setDuration(400);
                             page_tag.setVisibility(View.VISIBLE);page_tag.startAnimation(anims);
                             menu.setVisibility(View.VISIBLE);menu.startAnimation(anims);
-                            search.setVisibility(View.VISIBLE);search.startAnimation(anims);
+                            done.startAnimation(anims);
                         }},400);
                     new Handler().postDelayed(new Runnable() {
                         @Override

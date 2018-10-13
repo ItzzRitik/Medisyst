@@ -150,23 +150,24 @@ public class HomeActivity extends AppCompatActivity {
                         int cx = data_div.getWidth()/2;
                         int cy = data_div.getHeight()/2;
                         int finalRadius = Math.max(data_div.getWidth(), data_div.getHeight());
-                        ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy, add.getWidth(), finalRadius).start();
+                        animator=ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy, add.getWidth(), finalRadius);
+                        animator.setDuration(500);
+                        animator.start();
+
+                        int colorFrom = getResources().getColor(R.color.colorAccent);
+                        int colorTo = getResources().getColor(R.color.colorPrimary);
+                        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                        colorAnimation.setDuration(500);
+                        colorAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+                        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator animator) {
+                                data_div.setBackgroundColor((int) animator.getAnimatedValue());
+                            }
+                        });
+                        colorAnimation.start();
                     }
                 });
-                int colorFrom = getResources().getColor(R.color.colorAccent);
-                int colorTo = getResources().getColor(R.color.colorPrimary);
-                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-                colorAnimation.setDuration(300);
-                colorAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animator) {
-                        data_div.setBackgroundColor((int) animator.getAnimatedValue());
-                    }
-
-                });
-                colorAnimation.start();
                 startAnim.start();
             }
         });

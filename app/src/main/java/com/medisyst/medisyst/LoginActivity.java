@@ -276,6 +276,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         setButtonEnabled(false);
+        ico_splash.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_initialgrow));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -283,7 +284,9 @@ public class LoginActivity extends AppCompatActivity {
                 splash_cover.setVisibility(View.GONE);
                 logo_div.setVisibility(View.VISIBLE);
                 logo_div.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal));
-                ico_splash.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans));
+
+                anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
+                anim.setDuration(1000);ico_splash.startAnimation(anim);
 
                 new Handler().postDelayed(new Runnable() {@Override public void run() {
                     new Handler().postDelayed(new Runnable() {@Override public void run() {

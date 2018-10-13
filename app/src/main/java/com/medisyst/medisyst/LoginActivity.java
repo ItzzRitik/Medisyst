@@ -496,7 +496,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         if(what) {
             signin.setBackgroundResource(R.drawable.signin);
-            signin.setTextColor(getResources().getColor(R.color.colorPrimary));
+            signin.setTextColor(getResources().getColor(R.color.colorAccent));
         }
         else {
             signin.setBackgroundResource(R.drawable.signin_disabled);

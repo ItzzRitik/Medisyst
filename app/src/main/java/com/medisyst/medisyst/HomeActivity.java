@@ -1,19 +1,15 @@
 package com.medisyst.medisyst;
 
-
 import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.net.http.SslError;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Vibrator;
@@ -34,26 +30,17 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Interpolator;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.tomergoldst.tooltips.ToolTipsManager;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -77,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
     SwipeRefreshLayout refresh;
     FloatingActionButton add;
     String Email="",Aadhaar="";
+    String symptoms[],sym_id[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -250,9 +238,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
     public void prepareHistory(){
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://nodeexercise-adityabhardwaj.c9users.io/schemes").newBuilder();
-        urlBuilder.addQueryParameter("email",getIntent().getStringExtra("email"));
-        Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
+        Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
                 .addHeader("Content-Type", "application/json").build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -268,16 +254,19 @@ public class HomeActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     try {
                         JSONArray postsArray = new JSONArray(mMessage);
-                        history = new ArrayList<>();
+                        symptoms = new String[postsArray.length()];
+                        sym_id = new String[postsArray.length()];
                         for (int i = 0; i < postsArray.length(); i++) {
                             JSONObject pO = postsArray.getJSONObject(i);
+                            symptoms[i]=pO.getString("Name");
+                            sym_id[i]=pO.getString("ID");
                         }
+                        Log.w("arr", symptoms.toString());
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
                                 if(Email==null){Email="aditya.aastha@gmail.com";}
                                 if(Aadhaar==null){Aadhaar="123456789123";}
-
                             }
                         });
                     }

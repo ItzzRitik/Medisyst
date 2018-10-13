@@ -125,7 +125,9 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);screenSize = new Point();
+        setContentView(R.layout.activity_profile);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        screenSize = new Point();
         getWindowManager().getDefaultDisplay().getSize(screenSize);
         diagonal=Math.sqrt((screenSize.x*screenSize.x) + (screenSize.y*screenSize.y));
         splash_cover=findViewById(R.id.splash_cover);
@@ -366,7 +368,7 @@ public class ProfileActivity extends AppCompatActivity {
                 float CurrentX = ico_splash.getX();
                 float CurrentY = ico_splash.getY();
                 float FinalX = -20;
-                float FinalY = 50;
+                float FinalY = 20;
                 Path path = new Path();
                 path.moveTo(CurrentX, CurrentY);
                 path.quadTo(CurrentX*4/3, (CurrentY+FinalY)/4, FinalX, FinalY);

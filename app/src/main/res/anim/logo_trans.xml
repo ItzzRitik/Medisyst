@@ -1,4 +1,5 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false"
     android:fillAfter ="true" android:fillEnabled="true" >
     <translate android:fromYDelta="0" android:toYDelta="-560"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>

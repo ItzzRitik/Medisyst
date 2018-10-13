@@ -286,7 +286,7 @@ public class LoginActivity extends AppCompatActivity {
                 logo_div.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal));
 
                 anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
-                anim.setDuration(1000);ico_splash.startAnimation(anim);
+                anim.setDuration(500);ico_splash.startAnimation(anim);
 
                 new Handler().postDelayed(new Runnable() {@Override public void run() {
                     new Handler().postDelayed(new Runnable() {@Override public void run() {

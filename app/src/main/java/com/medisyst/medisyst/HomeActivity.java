@@ -28,6 +28,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -60,7 +61,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
-    RelativeLayout logo_div,splash_cover;
+    RelativeLayout logo_div,splash_cover,diagnosis;
     ImageView ico_splash,menu,search;
     TextView page_tag;
     Animator animator;
@@ -123,6 +124,8 @@ public class HomeActivity extends AppCompatActivity {
                 }
         );
 
+        diagnosis=findViewById(R.id.diagnosis);
+
         add = findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,13 +133,24 @@ public class HomeActivity extends AppCompatActivity {
                 float CurrentX = add.getX();
                 float CurrentY = add.getY();
                 float FinalX = (data_div.getWidth()/2)-(add.getWidth()/2);
-                float FinalY = (data_div.getHeight()/2)-(add.getHeight());
+                float FinalY = (data_div.getHeight()/2)-(add.getHeight()/2);
                 Path path = new Path();
                 path.moveTo(CurrentX, CurrentY);
                 path.quadTo(CurrentX*4/3, (CurrentY+FinalY)*2/5, FinalX, FinalY);
                 startAnim = ObjectAnimator.ofFloat(add, View.X, View.Y, path);
                 startAnim.setDuration(300);
                 startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+                startAnim.addListener(new Animator.AnimatorListener() {
+                    @Override public void onAnimationStart(Animator animator) {}
+                    @Override public void onAnimationCancel(Animator animator) {}
+                    @Override public void onAnimationRepeat(Animator animator) {}
+                    @Override public void onAnimationEnd(Animator animator) {
+                        int cx = diagnosis.getRight();
+                        int cy = diagnosis.getBottom();
+                        int finalRadius = Math.max(diagnosis.getWidth(), diagnosis.getHeight());
+                        ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy, add.getWidth(), finalRadius).start();
+                    }
+                });
                 startAnim.start();
             }
         });

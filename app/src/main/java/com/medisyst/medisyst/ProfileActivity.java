@@ -261,11 +261,18 @@ public class ProfileActivity extends AppCompatActivity {
             public void onPictureTaken(Bitmap result, int rotationDegrees) {
                 Matrix matrix = new Matrix();
                 matrix.postRotate(90);
+                Toast.makeText(ProfileActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 result= Bitmap.createBitmap(result, 0, 0, result.getWidth(), result.getHeight(), matrix, true);
                 vibrate(20);
                 profile_path = MediaStore.Images.Media.insertImage(ProfileActivity.this.getContentResolver(), result, "Title", null);
                 UCrop.of(Uri.parse(profile_path),Uri.parse(profile_url)).withOptions(options).withAspectRatio(1,1)
                         .withMaxResultSize(maxWidth, maxHeight).start(ProfileActivity.this);
+            }
+        });
+        cameraView.setOnCameraErrorListener(new CameraViewImpl.OnCameraErrorListener() {
+            @Override
+            public void onCameraError(Exception e) {
+                Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         profile_url=new File(new ContextWrapper(getApplicationContext()).getDir("imageDir", Context.MODE_PRIVATE),"profile.jpg").getAbsolutePath();
@@ -491,7 +498,7 @@ public class ProfileActivity extends AppCompatActivity {
                     closeCam();
                     new File(getRealPathFromURI(ProfileActivity.this,Uri.parse(profile_path))).delete();
                 }
-                catch (Exception e){}
+                catch (Exception ignored){}
             }
             else if (resultcode == UCrop.RESULT_ERROR) {
                 final Throwable cropError = UCrop.getError(intent);

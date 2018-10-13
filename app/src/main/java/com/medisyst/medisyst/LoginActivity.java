@@ -307,7 +307,7 @@ public class LoginActivity extends AppCompatActivity {
         if(log==0)
         {
             nextLoading(true);
-            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://nodeexercise-adityabhardwaj.c9users.io/check").newBuilder();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/check").newBuilder();
             urlBuilder.addQueryParameter("email", email.getText().toString());
             Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
                     .addHeader("Content-Type", "text/html").build();
@@ -379,7 +379,7 @@ public class LoginActivity extends AppCompatActivity {
         else if(log==1)
         {
             nextLoading(true);
-            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://nodeexercise-adityabhardwaj.c9users.io/login").newBuilder();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/login").newBuilder();
             urlBuilder.addQueryParameter("email", email.getText().toString());
             urlBuilder.addQueryParameter("password", pass.getText().toString());
             Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
@@ -402,9 +402,9 @@ public class LoginActivity extends AppCompatActivity {
                                 newPageAnim();
                                 nextLoading(false);
                                 new Handler().postDelayed(new Runnable() {@Override public void run() {
-//                                    Intent home=new Intent(LoginActivity.this, HomeActivity.class);
-//                                    home.putExtra("email",email.getText().toString());
-//                                    LoginActivity.this.startActivity(home);
+                                    Intent home=new Intent(LoginActivity.this, HomeActivity.class);
+                                    home.putExtra("email",email.getText().toString());
+                                    LoginActivity.this.startActivity(home);
                                     finish();
                                     LoginActivity.this.overridePendingTransition(0, 0);}},1500);
                             }
@@ -450,10 +450,10 @@ public class LoginActivity extends AppCompatActivity {
                                 newPageAnim();
                                 nextLoading(false);
                                 new Handler().postDelayed(new Runnable() {@Override public void run() {
-//                                    Intent profile = new Intent(LoginActivity.this, ProfileActivity.class);
-//                                    profile.putExtra("email",email.getText().toString());
-//                                    LoginActivity.this.startActivity(profile);
-//                                    finish();
+                                    Intent profile = new Intent(LoginActivity.this, ProfileActivity.class);
+                                    profile.putExtra("email",email.getText().toString());
+                                    LoginActivity.this.startActivity(profile);
+                                    finish();
                                     LoginActivity.this.overridePendingTransition(0, 0);}},1500);
                             }
                         });

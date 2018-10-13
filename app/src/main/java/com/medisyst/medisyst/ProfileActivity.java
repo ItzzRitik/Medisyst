@@ -375,14 +375,8 @@ public class ProfileActivity extends AppCompatActivity {
                 startAnim = ObjectAnimator.ofFloat(ico_splash, View.X, View.Y, path);
                 startAnim.setDuration(800);
                 startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-
-                AlphaAnimation anims = new AlphaAnimation(0.6f,1);
-                anims.setDuration(1000);
-                anims.setInterpolator(new AccelerateDecelerateInterpolator());
-
-                logo_div.startAnimation(anims);
                 startAnim.start();
-                ico_splash.animate().scaleX(0.28f).scaleY(0.28f).setDuration(1000).start();
+                ico_splash.animate().scaleX(0.27f).scaleY(0.27f).setDuration(1000).start();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

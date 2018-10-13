@@ -213,7 +213,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/pass"
-
                 android:layout_marginStart="5dp"
                 android:textColor="#616161"
                 android:drawablePadding="10dp"

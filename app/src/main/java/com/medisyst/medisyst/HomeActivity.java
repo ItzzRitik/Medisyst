@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
     double diagonal;
     OkHttpClient client;
     SwipeRefreshLayout refresh;
+    FloatingActionButton add;
     String Email="",Aadhaar="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +122,24 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        add = findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                float CurrentX = add.getX();
+                float CurrentY = add.getY();
+                float FinalX = data_div.getWidth()/2;
+                float FinalY = data_div.getHeight()/2;
+                Path path = new Path();
+                path.moveTo(CurrentX, CurrentY);
+                path.quadTo(CurrentX*4/3, (CurrentY+FinalY)/4, FinalX, FinalY);
+                startAnim = ObjectAnimator.ofFloat(ico_splash, View.X, View.Y, path);
+                startAnim.setDuration(800);
+                startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+                startAnim.start();
+            }
+        });
 
         history = new ArrayList<>();
         display=findViewById(R.id.display);

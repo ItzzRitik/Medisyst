@@ -429,10 +429,10 @@ public class LoginActivity extends AppCompatActivity {
             //SignUp Initiate
             Log.i("sign", "SignUp Initiate");
             nextLoading(true);
-            RequestBody postBody = new FormBody.Builder()
-                    .add("email", email.getText().toString()).add("password", con_pass.getText().toString()).build();
-            Log.i("sign",postBody.toString());
-            Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/tempsignup").get()
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/tempsignup").newBuilder();
+            urlBuilder.addQueryParameter("email", email.getText().toString());
+            urlBuilder.addQueryParameter("password", pass.getText().toString());
+            Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
                     .addHeader("Content-Type", "application/json").build();
             client.newCall(request).enqueue(new Callback() {
                 @Override

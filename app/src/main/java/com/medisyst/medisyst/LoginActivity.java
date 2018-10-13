@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         client = new OkHttpClient();
 
         appNameSplash=findViewById(R.id.appNameSplash);
-        appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
 
         forget_create=findViewById(R.id.forget_create);
         forget_create.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
@@ -299,7 +299,7 @@ public class LoginActivity extends AppCompatActivity {
                         scaleY(login_div,48,400,new OvershootInterpolator());}},200);
                     scaleY(social_div,80,280,new AccelerateInterpolator());
                 }},800);
-            }},1500);
+            }},2000);
     }
     public void performSignIn()
     {

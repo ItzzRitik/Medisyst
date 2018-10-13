@@ -142,6 +142,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override public void onAnimationCancel(Animator animator) {}
                     @Override public void onAnimationRepeat(Animator animator) {}
                     @Override public void onAnimationEnd(Animator animator) {
+                        page_tag.setText(R.string.diagnosis);
                         diagnosis.setVisibility(View.VISIBLE);
                         int cx = data_div.getWidth()/2;
                         int cy = data_div.getHeight()/2;

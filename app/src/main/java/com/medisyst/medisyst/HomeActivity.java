@@ -42,6 +42,7 @@ import android.widget.TextView;
 
 import com.hootsuite.nachos.NachoTextView;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
+import com.rm.rmswitch.RMSwitch;
 import com.tomergoldst.tooltips.ToolTipsManager;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
     RelativeLayout logo_div,splash_cover,diagnosis;
     ImageView ico_splash,menu,done,dob_chooser;
     EditText dob;
+    RMSwitch gender;
     TextView page_tag,symptoms_tag,gender_tag;
     Animator animator;
     CardView data_div;
@@ -155,6 +157,19 @@ public class HomeActivity extends AppCompatActivity {
         symptoms_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
         gender_tag=findViewById(R.id.gender_tag);
         gender_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+
+        gender=findViewById(R.id.gender);
+        gender.addSwitchObserver(new RMSwitch.RMSwitchObserver() {
+            @Override
+            public void onCheckStateChange(RMSwitch switchView, boolean isChecked) {
+                if(isChecked){
+                    gender_tag.setText(R.string.male);
+                }
+                else{
+                    gender_tag.setText(R.string.female);
+                }
+            }
+        });
 
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);

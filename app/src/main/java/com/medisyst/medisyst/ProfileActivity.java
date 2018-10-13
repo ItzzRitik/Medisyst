@@ -366,8 +366,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 float CurrentX = ico_splash.getX();
                 float CurrentY = ico_splash.getY();
-                float FinalX = -50;
-                float FinalY = -50;
+                float FinalX = -100;
+                float FinalY = -108;
                 Path path = new Path();
                 path.moveTo(CurrentX, CurrentY);
                 path.quadTo(CurrentX*4/3, (CurrentY+FinalY)/4, FinalX, FinalY);
@@ -382,11 +382,11 @@ public class ProfileActivity extends AppCompatActivity {
 
                 logo_div.startAnimation(anims);
                 startAnim.start();
-                ico_splash.animate().scaleX(0.3f).scaleY(0.3f).setDuration(1000).start();
+                ico_splash.animate().scaleX(0.28f).scaleY(0.28f).setDuration(1000).start();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        scaleY(data_div,pxtodp(splash_cover.getHeight())-95,800,new AccelerateDecelerateInterpolator());
+                        scaleY(data_div,pxtodp(splash_cover.getHeight())-65,800,new AccelerateDecelerateInterpolator());
                     }},10);
 
                 new Handler().postDelayed(new Runnable() {

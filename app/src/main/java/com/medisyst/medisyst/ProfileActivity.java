@@ -112,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onResume();
         if(camera_pane.getVisibility()== View.VISIBLE)
         {
-            if(checkPerm() && !cameraView.isCameraOpened()){cameraView.start();}
+            if(checkPerm() && !cameraView.isCameraOpened()){cameraView.start();cameraListener();}
             new Handler().postDelayed(new Runnable() {@Override public void run()
             {
                 click.setVisibility(View.VISIBLE);
@@ -202,7 +202,9 @@ public class ProfileActivity extends AppCompatActivity {
                     final Animator animator = ViewAnimationUtils.createCircularReveal(camera_pane,dptopx(98),dptopx(260),0, (float)diagonal);
                     animator.setInterpolator(new AccelerateDecelerateInterpolator());animator.setDuration(500);animator.start();
                     if (checkPerm()) {
-                        permission_camera.setVisibility(View.GONE);if(!cameraView.isCameraOpened()){cameraView.start();}
+                        permission_camera.setVisibility(View.GONE);if(!cameraView.isCameraOpened()){cameraView.start();
+                            cameraListener();
+                        }
                     }
                     new Handler().postDelayed(new Runnable() {@Override public void run()
                     {
@@ -242,39 +244,6 @@ public class ProfileActivity extends AppCompatActivity {
         options.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         options.setActiveWidgetColor(ContextCompat.getColor(this, R.color.colorPrimary));
 
-        cameraView=findViewById(R.id.cam);
-        cameraView.setOnTurnCameraFailListener(new CameraViewImpl.OnTurnCameraFailListener() {
-            @Override
-            public void onTurnCameraFail(Exception e) {
-                Toast.makeText(ProfileActivity.this, "Switch Camera Failed. Does you device has a front camera?",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        cameraView.setOnCameraErrorListener(new CameraViewImpl.OnCameraErrorListener() {
-            @Override
-            public void onCameraError(Exception e) {
-                Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        cameraView.setOnPictureTakenListener(new CameraViewImpl.OnPictureTakenListener() {
-            @Override
-            public void onPictureTaken(Bitmap result, int rotationDegrees) {
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                Toast.makeText(ProfileActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-                result= Bitmap.createBitmap(result, 0, 0, result.getWidth(), result.getHeight(), matrix, true);
-                vibrate(20);
-                profile_path = MediaStore.Images.Media.insertImage(ProfileActivity.this.getContentResolver(), result, "Title", null);
-                UCrop.of(Uri.parse(profile_path),Uri.parse(profile_url)).withOptions(options).withAspectRatio(1,1)
-                        .withMaxResultSize(maxWidth, maxHeight).start(ProfileActivity.this);
-            }
-        });
-        cameraView.setOnCameraErrorListener(new CameraViewImpl.OnCameraErrorListener() {
-            @Override
-            public void onCameraError(Exception e) {
-                Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
         profile_url=new File(new ContextWrapper(getApplicationContext()).getDir("imageDir", Context.MODE_PRIVATE),"profile.jpg").getAbsolutePath();
 
 
@@ -364,6 +333,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        cameraView=findViewById(R.id.cam);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -402,6 +372,39 @@ public class ProfileActivity extends AppCompatActivity {
                     }},500);
 
             }},1500);
+    }
+    public void cameraListener(){
+        cameraView.setOnFocusLockedListener(new CameraViewImpl.OnFocusLockedListener() {
+            @Override
+            public void onFocusLocked() {
+            }
+        });
+        cameraView.setOnPictureTakenListener(new CameraViewImpl.OnPictureTakenListener() {
+            @Override
+            public void onPictureTaken(Bitmap result, int rotationDegrees) {
+                Log.e("Camera", "onPictureTaken: " );
+                Matrix matrix = new Matrix();
+                matrix.postRotate(180);
+                result= Bitmap.createBitmap(result, 0, 0, result.getWidth(), result.getHeight(), matrix, true);
+                vibrate(20);
+                profile_path = MediaStore.Images.Media.insertImage(ProfileActivity.this.getContentResolver(), result, "Title", null);
+                UCrop.of(Uri.parse(profile_path),Uri.parse(profile_url)).withOptions(options).withAspectRatio(1,1)
+                        .withMaxResultSize(maxWidth, maxHeight).start(ProfileActivity.this);
+            }
+        });
+        cameraView.setOnTurnCameraFailListener(new CameraViewImpl.OnTurnCameraFailListener() {
+            @Override
+            public void onTurnCameraFail(Exception e) {
+                Toast.makeText(ProfileActivity.this, "Switch Camera Failed. Does you device has a front camera?",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        cameraView.setOnCameraErrorListener(new CameraViewImpl.OnCameraErrorListener() {
+            @Override
+            public void onCameraError(Exception e) {
+                Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     public void createProfile(){
         int tag=0;
@@ -561,7 +564,7 @@ public class ProfileActivity extends AppCompatActivity {
                             cameraView.setVisibility(View.GONE);
                             cameraView.setVisibility(View.VISIBLE);
                             if(!cameraView.isCameraOpened()){
-                                cameraView.start();
+                                cameraView.start();cameraListener();
                             }
                         }},1300);
                         new Handler().postDelayed(new Runnable() {@Override public void run() {toolTip.findAndDismiss(click);}},4000);

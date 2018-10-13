@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
     RelativeLayout logo_div,splash_cover,diagnosis;
     ImageView ico_splash,menu,done,dob_chooser;
     EditText dob;
-    TextView page_tag,symptoms_tag;
+    TextView page_tag,symptoms_tag,gender_tag;
     Animator animator;
     CardView data_div;
     ObjectAnimator startAnim;
@@ -153,6 +153,8 @@ public class HomeActivity extends AppCompatActivity {
         });
         symptoms_tag=findViewById(R.id.symptoms_tag);
         symptoms_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        gender_tag=findViewById(R.id.gender_tag);
+        gender_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
 
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);

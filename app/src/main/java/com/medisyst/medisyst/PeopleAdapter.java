@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.MyViewHolder> {
-    private List<People> schemes;
+    private List<History> schemes;
     String email="",aadhaar="";
     private HomeActivity homeActivity;
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -40,7 +40,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.MyViewHold
             cardItem = view.findViewById(R.id.cardItem);
         }
     }
-    PeopleAdapter(HomeActivity homeActivity, List<People> schemes, String email, String aadhaar) {
+    PeopleAdapter(HomeActivity homeActivity, List<History> schemes, String email, String aadhaar) {
         this.schemes = schemes;
         this.homeActivity = homeActivity;
         this.email=email;

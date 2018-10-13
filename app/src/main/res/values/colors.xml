@@ -11,7 +11,7 @@
     <color name="profile_text">#d3d3d3</color>
     <color name="profile_back">#82ffffff</color>
     <color name="gender_back">#d1d1d1</color>
-    <color name="gender_male">#ff8b59</color>
+    <color name="gender_male">#555555</color>
     <color name="gender_female">#ff697f</color>
     <color name="progress">#ffffff</color>
 </resources>

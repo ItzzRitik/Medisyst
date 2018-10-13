@@ -281,13 +281,9 @@ public class LoginActivity extends AppCompatActivity {
             public void run() {
                 // Splash Animation
                 splash_cover.setVisibility(View.GONE);
-                Animation anima = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal);
-                logo_div.setVisibility(View.VISIBLE);logo_div.startAnimation(anima);
-
-                AnimationSet animationSet = new AnimationSet(true);
-                animationSet.addAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans));
-                animationSet.addAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_shrink));
-                ico_splash.startAnimation(animationSet);
+                logo_div.setVisibility(View.VISIBLE);
+                logo_div.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal));
+                ico_splash.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans));
 
                 new Handler().postDelayed(new Runnable() {@Override public void run() {
                     new Handler().postDelayed(new Runnable() {@Override public void run() {

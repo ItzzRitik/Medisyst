@@ -1,5 +1,7 @@
 package com.medisyst.medisyst;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
@@ -67,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     String buttonText="NEXT";
     OkHttpClient client;
     ProgressBar nextLoad;
+    ObjectAnimator hearBeat;
     @Override
     public void onBackPressed() {
         showKeyboard(email,false);
@@ -277,6 +280,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setButtonEnabled(false);
         ico_splash.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_initialgrow));
+        pulseAnimation();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -294,6 +298,12 @@ public class LoginActivity extends AppCompatActivity {
                 }},800);
             }},1500);
     }
+    private void pulseAnimation(){
+        hearBeat= ObjectAnimator.ofPropertyValuesHolder(ico_splash, PropertyValuesHolder.ofFloat("scaleX", 1.5f), PropertyValuesHolder.ofFloat("scaleY", 1.5f));
+        hearBeat.setDuration(300);
+        hearBeat.setRepeatCount(ObjectAnimator.INFINITE);
+        hearBeat.setRepeatMode(ObjectAnimator.REVERSE);
+        hearBeat.start();}
     public void performSignIn()
     {
         showKeyboard(email,false);

@@ -66,13 +66,9 @@
                     <android.support.design.widget.FloatingActionButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="25dp"
-                        android:layout_marginEnd="30dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:transformPivotX="0dp"
-                        android:transformPivotY="0dp"
+                        android:layout_margin="25dp"
                         android:src="@drawable/icon_mono"
+                        style="@style/SelectableItemBackgroundBorderless"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"/>
                 </RelativeLayout>

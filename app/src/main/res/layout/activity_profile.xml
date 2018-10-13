@@ -237,42 +237,6 @@
                             android:layout_marginEnd="15dp"
                             android:layout_below="@+id/aadhaar"
                             android:background="#616161"/>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/interestPage"
-                            android:layout_marginBottom="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"
-                            android:focusable="true"
-                            android:clickable="true"
-                            android:background="@drawable/interest">
-                            <com.google.android.flexbox.FlexboxLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/interest"
-                                android:padding="20dp"
-                                app:flexWrap="wrap"
-                                app:alignItems="stretch"
-                                app:alignContent="stretch">
-                            </com.google.android.flexbox.FlexboxLayout>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/interest_button"
-                                android:text="@string/interest"
-                                android:textSize="16sp"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorAccent"
-                                android:gravity="center"
-                                android:paddingStart="20dp"
-                                android:paddingEnd="20dp"
-                                android:paddingTop="7dp"
-                                android:paddingBottom="7dp"
-                                android:layout_centerHorizontal="true"
-                                android:background="@drawable/interest"/>
-                        </RelativeLayout>
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>

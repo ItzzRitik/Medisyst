@@ -81,13 +81,13 @@ import static android.R.attr.maxHeight;
 import static android.R.attr.maxWidth;
 
 public class ProfileActivity extends AppCompatActivity {
-    RelativeLayout logo_div,splash_cover,camera_pane,permission_camera,galary,click_pane,profile_menu_cov,interestPage;
+    RelativeLayout logo_div,splash_cover,camera_pane,permission_camera,galary,click_pane,profile_menu_cov;
     CardView data_div;
     ImageView dp_cover,ico_splash,done,camera_flip,click,flash,dob_chooser;
     Button allow_camera;
     Animation anim;
-    TextView page_tag,gender_tag,interest_button;
-    EditText f_name,l_name,dob,aadhaar,occ;
+    TextView page_tag,gender_tag;
+    EditText f_name,l_name,dob,aadhaar;
     RMSwitch gender;
     Point screenSize;
     Animator animator;
@@ -101,12 +101,10 @@ public class ProfileActivity extends AppCompatActivity {
     ToolTipsManager toolTip;
     Bitmap profile_dp=null;
     double diagonal;
-    FlexboxLayout interest;
     ChipCloud inter;
     OkHttpClient client;
     boolean tags[]={false,false,false,false,false,false,false,false,false
             ,false,false,false,false,false,false,false,false,false,false,false};
-    int interestX=0;
     @Override
     protected void onPause() {
         super.onPause();
@@ -172,35 +170,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         dob=findViewById(R.id.dob);
         dob.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
-
-        occ=findViewById(R.id.occ);
-        occ.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
-
-        interestPage=findViewById(R.id.interestPage);
-        interest_button=findViewById(R.id.interest_button);
-        interest_button.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
-        interest_button.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        interest_button.setBackgroundResource(R.drawable.interest_pressed);interest_button.setTextColor(Color.parseColor("#ffffff"));
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        interest_button.setBackgroundResource(R.drawable.interest);interest_button.setTextColor(Color.parseColor("#ff611c"));
-                        vibrate(20);
-                        if(interest_button.getText().equals(getString(R.string.interest))){
-                            interestX=interest_button.getWidth();
-                            selectInterest(true);
-                        }
-                        else {
-                            selectInterest(false);
-                        }
-                        break;
-                }
-                return true;
-            }
-        });
 
         aadhaar=findViewById(R.id.aadhaar);
         aadhaar.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
@@ -394,44 +363,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        interest = findViewById(R.id.interest);
-        interest.setVisibility(View.GONE);
-        ChipCloudConfig config = new ChipCloudConfig()
-                .selectMode(ChipCloud.SelectMode.multi)
-                .checkedChipColor(getResources().getColor(R.color.colorAccent))
-                .checkedTextColor(Color.parseColor("#ffffff"))
-                .uncheckedChipColor(Color.parseColor("#efefef"))
-                .uncheckedTextColor(Color.parseColor("#666666"))
-                .useInsetPadding(true)
-                .typeface(Typeface.createFromAsset(getAssets(), "fonts/above.ttf"));
-        inter = new ChipCloud(ProfileActivity.this, interest,config);
-        inter.addChip("Farming");
-        inter.addChip("Dairy");
-        inter.addChip("Livestock");
-        inter.addChip("Sports");
-        inter.addChip("Engineering");
-        inter.addChip("Transportation");
-        inter.addChip("Banking");
-        inter.addChip("Water");
-        inter.addChip("Land");
-        inter.addChip("Sanitation");
-        inter.addChip("IT Services");
-        inter.addChip("Manufacturing");
-        inter.addChip("Education");
-        inter.addChip("Revenue");
-        inter.addChip("Construction");
-        inter.addChip("Health Care");
-        inter.addChip("Housing");
-        inter.addChip("Armed Forces");
-        inter.addChip("Legal Aid");
-        inter.addChip("Electricity");
-        inter.setListener(new ChipListener() {
-            @Override
-            public void chipCheckedChange(int i, boolean b, boolean b1) {
-                tags[i]=b;
-            }
-        });
-
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -485,8 +416,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .add("lastname", l_name.getText().toString()+"")
                 .add("gender", gender_tag.getText().toString()+"")
                 .add("dob", dob.getText().toString()+"")
-                .add("aadhar", aadhaar.getText().toString()+"")
-                .add("occupation", occ.getText().toString()+"");
+                .add("aadhar", aadhaar.getText().toString()+"");
         for(int i=0;i<tags.length;i++){
             if(tags[i])
                 postBody.add("tags["+(tag++)+"]", ""+inter.getLabel(i));
@@ -505,45 +435,19 @@ public class ProfileActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 assert response.body() != null;
                 if(Integer.parseInt(Objects.requireNonNull(response.body()).string())==1 && response.isSuccessful()){
-                    Intent home=new Intent(ProfileActivity.this,HomeActivity.class);
-                    home.putExtra("isProfile",true);
-                    home.putExtra("divHeight",pxtodp(data_div.getHeight()));
-                    home.putExtra("email",ProfileActivity.this.getIntent().getStringExtra("email"));
-                    home.putExtra("aadhaar",aadhaar.getText().toString());
-                    ProfileActivity.this.startActivity(home);
-                    finish();
+//                    Intent home=new Intent(ProfileActivity.this,HomeActivity.class);
+//                    home.putExtra("isProfile",true);
+//                    home.putExtra("divHeight",pxtodp(data_div.getHeight()));
+//                    home.putExtra("email",ProfileActivity.this.getIntent().getStringExtra("email"));
+//                    home.putExtra("aadhaar",aadhaar.getText().toString());
+//                    ProfileActivity.this.startActivity(home);
+//                    finish();
                     ProfileActivity.this.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 }
                 else{
                 }
             }
         });
-    }
-    public void selectInterest(boolean open){
-        if(open){
-            scaleX(interestPage,pxtodp(f_name.getWidth()),300,new AccelerateDecelerateInterpolator());
-            scaleY(interestPage,310,300,new AccelerateDecelerateInterpolator());
-            interestPage.animate().translationY(-dptopx(10)).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(50).start();
-            interest_button.animate().translationY(dptopx(260)).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(300).start();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    interest_button.setText(R.string.interest_done);
-                    interest.setVisibility(View.VISIBLE);
-                }},100);
-        }
-        else {
-            scaleX(interestPage,pxtodp(interestX),400,new AccelerateDecelerateInterpolator());
-            scaleY(interestPage,pxtodp(interest_button.getHeight()),400,new AccelerateDecelerateInterpolator());
-            interestPage.animate().translationY(0).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(400).start();
-            interest_button.animate().translationY(dptopx(0)).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(400).start();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    interest_button.setText(R.string.interest);
-                    interest.setVisibility(View.GONE);
-                }},100);
-        }
     }
     public void scaleX(final View view,int x,int t, Interpolator interpolator)
     {

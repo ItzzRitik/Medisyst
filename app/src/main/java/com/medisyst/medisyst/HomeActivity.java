@@ -22,6 +22,8 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -128,8 +130,19 @@ public class HomeActivity extends AppCompatActivity {
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);
         symptom_edit.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
-        symptom_edit.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
-        symptom_edit.addChipTerminator(' ', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_TO_TERMINATOR);
+        symptom_edit.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override public void afterTextChanged(Editable editable) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(symptom_edit.getAllChips().size()==0 && symptom_edit.getText() == null){
+                    symptoms_tag.setVisibility(View.VISIBLE);
+                }
+                else {
+                    symptoms_tag.setVisibility(View.GONE);
+                }
+            }
+        });
         add = findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -281,8 +281,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Splash Animation
-                splash_cover.setVisibility(View.GONE);
-                logo_div.setVisibility(View.VISIBLE);
+                splash_cover.setVisibility(View.GONE);logo_div.setVisibility(View.VISIBLE);
                 logo_div.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal));
 
                 anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);

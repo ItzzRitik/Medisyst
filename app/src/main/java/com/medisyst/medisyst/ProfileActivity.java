@@ -98,8 +98,6 @@ public class ProfileActivity extends AppCompatActivity {
     Bitmap profile_dp=null;
     double diagonal;
     OkHttpClient client;
-    boolean tags[]={false,false,false,false,false,false,false,false,false
-            ,false,false,false,false,false,false,false,false,false,false,false};
     @Override
     protected void onPause() {
         super.onPause();
@@ -190,6 +188,8 @@ public class ProfileActivity extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(intent);
                 if(profile_lp) {profile_lp=false;}
                 else
                 {

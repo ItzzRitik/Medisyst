@@ -82,7 +82,16 @@
                         android:visibility="gone"
                         android:elevation="10dp"
                         android:background="@color/colorAccent">
-
+                        <com.hootsuite.nachos.NachoTextView
+                            android:id="@+id/symptoms"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:chipSpacing="2dp"
+                            app:chipBackground="@color/colorAccent"
+                            app:chipTextColor="@color/colorPrimary"
+                            app:chipTextSize="16dp"
+                            app:chipHeight="30dp"
+                            app:chipVerticalSpacing="3dp"/>
                     </RelativeLayout>
                 </RelativeLayout>
             </android.support.v4.widget.SwipeRefreshLayout>

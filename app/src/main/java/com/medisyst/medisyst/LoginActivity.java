@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     String buttonText="NEXT";
     OkHttpClient client;
     ProgressBar nextLoad;
-    ObjectAnimator hearBeat;
+    float scale=1.02f;
     @Override
     public void onBackPressed() {
         showKeyboard(email,false);
@@ -300,7 +300,7 @@ public class LoginActivity extends AppCompatActivity {
             }},1500);
     }
     private void pulseAnimation(){
-        ico_splash.animate().scaleXBy(1.2f).scaleYBy(1.2f).setDuration(500).setListener(scaleUpListener);
+        ico_splash.animate().scaleXBy(scale).scaleYBy(scale).setDuration(500).setListener(scaleUpListener);
     }
     private final Animator.AnimatorListener scaleUpListener = new Animator.AnimatorListener() {
 
@@ -308,7 +308,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override public void onAnimationRepeat(Animator animation) {}
         @Override
         public void onAnimationEnd(Animator animation) {
-            ico_splash.animate().scaleXBy(1).scaleYBy(1).setDuration(500).setListener(scaleDownListener);
+            ico_splash.animate().scaleXBy(-scale).scaleYBy(-scale).setDuration(500).setListener(scaleDownListener);
         }
         @Override public void onAnimationCancel(Animator animation) {}
     };
@@ -317,7 +317,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override  public void onAnimationRepeat(Animator animation) {}
         @Override
         public void onAnimationEnd(Animator animation) {
-            ico_splash.animate().scaleXBy(1.2f).scaleYBy(1.2f).setDuration(500 * 2).setListener(scaleUpListener);
+            ico_splash.animate().scaleXBy(scale).scaleYBy(scale).setDuration(500 * 2).setListener(scaleUpListener);
         }
         @Override public void onAnimationCancel(Animator animation) {}
     };

@@ -68,6 +68,7 @@ import java.util.Objects;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -407,18 +408,16 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
     public void createProfile(){
-        int tag=0;
-        FormBody.Builder postBody = new FormBody.Builder()
-                .add("email", getIntent().getStringExtra("email")+"")
-                .add("fname", f_name.getText().toString()+"")
-                .add("lname", l_name.getText().toString()+"")
-                .add("gender", gender_tag.getText().toString()+"")
-                .add("dob", dob.getText().toString()+"")
-                .add("aadhaar", aadhaar.getText().toString()+"");
-        RequestBody formBody = postBody.build();
-
-        Log.i("sign",postBody.toString());
-        Request request = new Request.Builder().url("https://nodeexercise-adityabhardwaj.c9users.io/update").post(formBody).build();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/update").newBuilder();
+        urlBuilder.addQueryParameter("email",getIntent().getStringExtra("email"));
+        urlBuilder.addQueryParameter("fname",f_name.getText().toString());
+        urlBuilder.addQueryParameter("lname",l_name.getText().toString());
+        urlBuilder.addQueryParameter("gender",gender_tag.getText().toString());
+        urlBuilder.addQueryParameter("dob",dob.getText().toString());
+        urlBuilder.addQueryParameter("aadhaar",aadhaar.getText().toString());
+        Log.i("sign",urlBuilder.toString());
+        Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                .addHeader("Content-Type", "application/json").build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -429,16 +428,15 @@ public class ProfileActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 assert response.body() != null;
                 if(Integer.parseInt(Objects.requireNonNull(response.body()).string())==1 && response.isSuccessful()){
-//                    Intent home=new Intent(ProfileActivity.this,HomeActivity.class);
-//                    home.putExtra("isProfile",true);
-//                    home.putExtra("divHeight",pxtodp(data_div.getHeight()));
-//                    home.putExtra("email",ProfileActivity.this.getIntent().getStringExtra("email"));
-//                    home.putExtra("aadhaar",aadhaar.getText().toString());
-//                    ProfileActivity.this.startActivity(home);
-//                    finish();
+                    Intent home=new Intent(ProfileActivity.this,HomeActivity.class);
+                    home.putExtra("isProfile",true);
+                    home.putExtra("email",ProfileActivity.this.getIntent().getStringExtra("email"));
+                    ProfileActivity.this.startActivity(home);
+                    finish();
                     ProfileActivity.this.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 }
                 else{
+                    Toast.makeText(ProfileActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity {
                 Path path = new Path();
                 path.moveTo(CurrentX, CurrentY);
                 path.quadTo(CurrentX*4/3, (CurrentY+FinalY)/4, FinalX, FinalY);
-                startAnim = ObjectAnimator.ofFloat(ico_splash, View.X, View.Y, path);
+                startAnim = ObjectAnimator.ofFloat(add, View.X, View.Y, path);
                 startAnim.setDuration(800);
                 startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
                 startAnim.start();

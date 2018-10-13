@@ -144,6 +144,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override public void onAnimationEnd(Animator animator) {
                         page_tag.setText(R.string.diagnosis);
                         done.setVisibility(View.VISIBLE);
+                        menu.setImageDrawable(getDrawable(R.drawable.back));
                         diagnosis.setVisibility(View.VISIBLE);
                         int cx = data_div.getWidth()/2;
                         int cy = data_div.getHeight()/2;

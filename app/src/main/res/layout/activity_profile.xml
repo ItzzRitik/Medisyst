@@ -53,11 +53,11 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="500dp"
                     android:layout_alignParentTop="true"
                     android:id="@+id/dp_cover"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/profile_cover"/>
+                    android:src="@mipmap/back_profile"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

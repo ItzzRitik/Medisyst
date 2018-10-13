@@ -57,7 +57,8 @@
                     android:layout_alignParentTop="true"
                     android:id="@+id/dp_cover"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/back"/>
+                    android:tileMode="repeat"
+                    android:src="@drawable/profile_back"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

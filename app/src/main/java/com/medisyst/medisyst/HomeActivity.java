@@ -143,14 +143,14 @@ public class HomeActivity extends AppCompatActivity {
                             try {
                                 JSONArray postsArray = new JSONArray(mMessage);
                                 Log.e("diag", postsArray.toString() );
+                                r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
                                 for (int i = 0; i < postsArray.length(); i++) {
                                     JSONObject res = postsArray.getJSONObject(i);
-                                    r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
                                     r=r+"Disease : "+res.getString("name")+"\n";
                                     r=r+"Professional Name : "+res.getString("profname")+"\n";
                                     r=r+"Prediction Accuracy : "+res.getString("accuracy")+"%\n";
-                                    r=r+"Specialisation : "+res.getString("specialisation")+"%\n";
-                                    r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+                                    r=r+"Specialisation : "+res.getString("specialisation")+"\n";
+                                    r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
                                 }
                                 Log.e("diag", r );
                                 new Handler(Looper.getMainLooper()).post(new Runnable() {

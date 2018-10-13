@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.Interpolator;
@@ -279,10 +280,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Splash Animation
-                anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
                 splash_cover.setVisibility(View.GONE);
                 Animation anima = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal);
-                logo_div.setVisibility(View.VISIBLE);logo_div.startAnimation(anima);ico_splash.startAnimation(anim);
+                logo_div.setVisibility(View.VISIBLE);logo_div.startAnimation(anima);
+
+                AnimationSet animationSet = new AnimationSet(true);
+                animationSet.addAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans));
+                animationSet.addAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_shrink));
+                ico_splash.startAnimation(animationSet);
+
                 new Handler().postDelayed(new Runnable() {@Override public void run() {
                     new Handler().postDelayed(new Runnable() {@Override public void run() {
                         scaleY(login_div,48,400,new OvershootInterpolator());}},200);

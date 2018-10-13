@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Path;
@@ -33,6 +34,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Interpolator;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -45,7 +47,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import okhttp3.Call;
@@ -57,7 +62,7 @@ import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
     RelativeLayout logo_div,splash_cover,diagnosis;
-    ImageView ico_splash,menu,done;
+    ImageView ico_splash,menu,done,dob_chooser;
     EditText dob;
     TextView page_tag,symptoms_tag;
     Animator animator;
@@ -124,6 +129,28 @@ public class HomeActivity extends AppCompatActivity {
 
         dob=findViewById(R.id.dob);
         dob.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        dob_chooser=findViewById(R.id.dob_chooser);
+        dob_chooser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vibrate(20);
+                DatePickerDialog dd = new DatePickerDialog(HomeActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                try {
+                                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                    String dateInString = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                                    Date date = formatter.parse(dateInString);
+                                    formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                    dob.setText(formatter.format(date));
+                                } catch (Exception ex) {}
+                            }
+                        }, 2000,  Calendar.getInstance().get(Calendar.MONTH),  Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                dd.show();
+            }
+        });
         symptoms_tag=findViewById(R.id.symptoms_tag);
         symptoms_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
 

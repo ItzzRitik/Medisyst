@@ -86,11 +86,12 @@
                             android:id="@+id/symptom_edit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:chipSpacing="2dp"
+                            android:textColor="@color/colorPrimary"
                             app:chipBackground="@color/colorAccentLight"
                             app:chipTextColor="@color/colorPrimary"
                             app:chipTextSize="16dp"
                             app:chipHeight="30dp"
+                            app:chipSpacing="5dp"
                             app:chipVerticalSpacing="5dp"
                             android:layout_margin="10dp"/>
                     </RelativeLayout>

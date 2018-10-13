@@ -162,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
                         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator animator) {
-                                data_div.setBackgroundColor((int) animator.getAnimatedValue());
+                                diagnosis.setBackgroundColor((int) animator.getAnimatedValue());
                             }
                         });
                         colorAnimation.start();

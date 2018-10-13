@@ -410,11 +410,11 @@ public class ProfileActivity extends AppCompatActivity {
         int tag=0;
         FormBody.Builder postBody = new FormBody.Builder()
                 .add("email", getIntent().getStringExtra("email")+"")
-                .add("firstname", f_name.getText().toString()+"")
-                .add("lastname", l_name.getText().toString()+"")
+                .add("fname", f_name.getText().toString()+"")
+                .add("lname", l_name.getText().toString()+"")
                 .add("gender", gender_tag.getText().toString()+"")
                 .add("dob", dob.getText().toString()+"")
-                .add("aadhar", aadhaar.getText().toString()+"");
+                .add("aadhaar", aadhaar.getText().toString()+"");
         RequestBody formBody = postBody.build();
 
         Log.i("sign",postBody.toString());

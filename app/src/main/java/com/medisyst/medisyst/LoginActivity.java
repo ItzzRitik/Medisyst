@@ -1,5 +1,6 @@
 package com.medisyst.medisyst;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
@@ -278,7 +279,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        setButtonEnabled(false);
+        setButtonEnabled(false);logo_div.setVisibility(View.VISIBLE);
         ico_splash.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_initialgrow));
         pulseAnimation();
         new Handler().postDelayed(new Runnable() {
@@ -299,17 +300,27 @@ public class LoginActivity extends AppCompatActivity {
             }},1500);
     }
     private void pulseAnimation(){
-        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
-                ico_splash,
-                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
-                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
-        scaleDown.setDuration(310);
-
-        scaleDown.setRepeatCount(5);
-        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
-
-        scaleDown.start();
+        ico_splash.animate().scaleXBy(1.2f).scaleYBy(1.2f).setDuration(500).setListener(scaleUpListener);
     }
+    private final Animator.AnimatorListener scaleUpListener = new Animator.AnimatorListener() {
+
+        @Override public void onAnimationStart(Animator animation) {}
+        @Override public void onAnimationRepeat(Animator animation) {}
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            ico_splash.animate().scaleXBy(1).scaleYBy(1).setDuration(500).setListener(scaleDownListener);
+        }
+        @Override public void onAnimationCancel(Animator animation) {}
+    };
+    private final Animator.AnimatorListener scaleDownListener = new Animator.AnimatorListener() {
+        @Override public void onAnimationStart(Animator animation) {}
+        @Override  public void onAnimationRepeat(Animator animation) {}
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            ico_splash.animate().scaleXBy(1.2f).scaleYBy(1.2f).setDuration(500 * 2).setListener(scaleUpListener);
+        }
+        @Override public void onAnimationCancel(Animator animation) {}
+    };
     public void performSignIn()
     {
         showKeyboard(email,false);

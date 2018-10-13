@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/splash_cover"
-            android:background="@drawable/round_app"
+            android:background="@color/colorPrimary"
             android:layout_centerInParent="true">
         </RelativeLayout>
         <ImageView

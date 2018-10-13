@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     String buttonText="NEXT";
     OkHttpClient client;
     ProgressBar nextLoad;
+    TextView appNameSplash;
     @Override
     public void onBackPressed() {
         showKeyboard(email,false);
@@ -88,6 +89,9 @@ public class LoginActivity extends AppCompatActivity {
         login_div=findViewById(R.id.login_div);
         social_div=findViewById(R.id.social_div);
         client = new OkHttpClient();
+
+        appNameSplash=findViewById(R.id.appNameSplash);
+        appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
 
         forget_create=findViewById(R.id.forget_create);
         forget_create.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));

@@ -1,7 +1,7 @@
 <set  xmlns:android="http://schemas.android.com/apk/res/android"
     android:fillAfter ="true" android:fillEnabled="true"  android:duration="1000"
     android:interpolator="@android:anim/accelerate_decelerate_interpolator">
-    <translate android:fromYDelta="-570" android:toYDelta="16"/>
+    <translate android:fromYDelta="-570" android:toYDelta="20"/>
     <scale
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:interpolator="@android:anim/overshoot_interpolator"

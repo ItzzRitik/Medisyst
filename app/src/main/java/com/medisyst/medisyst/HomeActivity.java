@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
     RelativeLayout logo_div,splash_cover,diagnosis;
     ImageView ico_splash,menu,done;
     EditText dob;
-    TextView page_tag;
+    TextView page_tag,symptoms_tag;
     Animator animator;
     CardView data_div;
     ObjectAnimator startAnim;
@@ -122,6 +122,8 @@ public class HomeActivity extends AppCompatActivity {
 
         dob=findViewById(R.id.dob);
         dob.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        symptoms_tag=findViewById(R.id.symptoms_tag);
+        symptoms_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2_bold.otf"));
 
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);

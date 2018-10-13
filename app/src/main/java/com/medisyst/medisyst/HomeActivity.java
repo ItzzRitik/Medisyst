@@ -118,7 +118,7 @@ public class HomeActivity extends AppCompatActivity {
         );
 
         diagnosis=findViewById(R.id.diagnosis);
-
+        symptom_edit=findViewById(R.id.symptom_edit);
         add = findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

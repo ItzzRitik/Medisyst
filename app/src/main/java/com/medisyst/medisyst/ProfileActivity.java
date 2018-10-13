@@ -384,7 +384,8 @@ public class ProfileActivity extends AppCompatActivity {
             public void onPictureTaken(Bitmap result, int rotationDegrees) {
                 Log.e("Camera", "onPictureTaken: " );
                 Matrix matrix = new Matrix();
-                matrix.postRotate(180);
+                matrix.postRotate(90);
+                matrix.postScale(-1, 1, result.getWidth()/2, result.getHeight()/2);
                 result= Bitmap.createBitmap(result, 0, 0, result.getWidth(), result.getHeight(), matrix, true);
                 vibrate(20);
                 profile_path = MediaStore.Images.Media.insertImage(ProfileActivity.this.getContentResolver(), result, "Title", null);

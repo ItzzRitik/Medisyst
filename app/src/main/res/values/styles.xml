@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="Theme1" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -19,16 +19,8 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
-    <style name="Theme2" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="colorPrimary">@color/colorPrimary1</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark1</item>
-        <item name="colorAccent">@color/colorAccent1</item>
-        <item name="android:windowBackground">@drawable/splash</item>
-        <item name="colorControlHighlight">@color/ripple1</item>
-    </style>
     <style name="SelectableItemBackgroundBorderless">
-        <item name="android:theme">@style/Theme1</item>
+        <item name="android:theme">@style/MainTheme</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
     </style>
 

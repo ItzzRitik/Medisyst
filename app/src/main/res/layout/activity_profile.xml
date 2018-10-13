@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:id="@+id/logo_div"
             android:visibility="gone"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:layout_centerInParent="true">
         </RelativeLayout>
         <RelativeLayout
@@ -262,7 +262,7 @@
             android:layout_marginStart="85dp"
             android:visibility="invisible"
             android:textSize="28sp"
-            android:textColor="#222"/>
+            android:textColor="@color/profile"/>
     </RelativeLayout>
 
     <RelativeLayout

@@ -89,6 +89,7 @@
                             android:textColor="@color/colorPrimary"
                             android:textCursorDrawable="@drawable/cursor"
                             android:background="@drawable/symptom_field"
+                            android:textColorHint="@color/ripple"
                             android:padding="10dp"
                             android:paddingStart="15dp"
                             android:paddingEnd="15dp"

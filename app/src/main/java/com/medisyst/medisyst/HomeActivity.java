@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     OkHttpClient client;
     SwipeRefreshLayout refresh;
     FloatingActionButton add;
-    String r="";
+    String r="",Email;
     NachoTextView symptom_edit;
     String symptoms[],sym_id[];
     @Override
@@ -96,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
         data_div=findViewById(R.id.data_div);
         toolTip = new ToolTipsManager();
         client = new OkHttpClient();
+        Email=getIntent().getStringExtra("email");
 
         page_tag=findViewById(R.id.page_tag);
         page_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
@@ -143,14 +144,12 @@ public class HomeActivity extends AppCompatActivity {
                                 JSONArray postsArray = new JSONArray(mMessage);
                                 Log.e("diag", postsArray.toString() );
                                 for (int i = 0; i < postsArray.length(); i++) {
-                                    JSONObject res = new JSONArray((postsArray.getJSONObject(i)).toString()).getJSONObject(i);
-                                    JSONObject issue = res.getJSONObject("Issue");
-                                    JSONObject spec = res.getJSONObject("Specialisation");
+                                    JSONObject res = postsArray.getJSONObject(i);
                                     r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                                    r=r+"Disease : "+issue.getString("Name")+"\n";
-                                    r=r+"Professional Name : "+issue.getString("ProfName")+"\n";
-                                    r=r+"Prediction Accuracy : "+issue.getString("Accuracy")+"%\n";
-                                    r=r+"Specialisation : "+spec.getString("Name")+"%\n";
+                                    r=r+"Disease : "+res.getString("name")+"\n";
+                                    r=r+"Professional Name : "+res.getString("profname")+"\n";
+                                    r=r+"Prediction Accuracy : "+res.getString("accuracy")+"%\n";
+                                    r=r+"Specialisation : "+res.getString("specialisation")+"%\n";
                                     r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
                                 }
                                 Log.e("diag", r );
@@ -376,6 +375,7 @@ public class HomeActivity extends AppCompatActivity {
         return -1;
     }
     public void prepareHistory(){
+        //Generating Symptom Array
         Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
                 .addHeader("Content-Type", "application/json").build();
         client.newCall(request).enqueue(new Callback() {
@@ -398,6 +398,45 @@ public class HomeActivity extends AppCompatActivity {
                             JSONObject pO = postsArray.getJSONObject(i);
                             symptoms[i]=pO.getString("Name");
                             sym_id[i]=pO.getString("ID");
+                        }
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms);
+                                symptom_edit.setAdapter(adapter);
+                            }
+                        });
+                    }
+                    catch (JSONException e) {
+                        Log.w("error", e.toString());
+                    }
+                }
+            }
+        });
+
+        //Generating History Page
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/history").newBuilder();
+        urlBuilder.addQueryParameter("email","Aditya@gmail.com");
+        request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                .addHeader("Content-Type", "application/json").build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.w("failure", e.getMessage());
+                call.cancel();
+            }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                assert response.body() != null;
+                String mMessage = Objects.requireNonNull(response.body()).string();
+                refresh.setRefreshing(false);
+                if (response.isSuccessful()){
+                    try {
+                        JSONArray postsArray = new JSONArray(mMessage);
+                        history = new ArrayList<>();
+                        for (int i = 0; i < postsArray.length(); i++) {
+                            JSONObject pO = postsArray.getJSONObject(i);
+                            //history.add();
                         }
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override

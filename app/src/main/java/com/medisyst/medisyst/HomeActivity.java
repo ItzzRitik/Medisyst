@@ -30,9 +30,12 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Interpolator;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.hootsuite.nachos.NachoTextView;
 import com.tomergoldst.tooltips.ToolTipsManager;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
     SwipeRefreshLayout refresh;
     FloatingActionButton add;
     String Email="",Aadhaar="";
+    NachoTextView symptom_edit;
     String symptoms[],sym_id[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,8 +268,8 @@ public class HomeActivity extends AppCompatActivity {
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
-                                if(Email==null){Email="aditya.aastha@gmail.com";}
-                                if(Aadhaar==null){Aadhaar="123456789123";}
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms);
+                                symptom_edit.setAdapter(adapter);
                             }
                         });
                     }

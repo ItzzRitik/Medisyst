@@ -83,7 +83,7 @@
                         android:elevation="10dp"
                         android:background="@color/colorAccent">
                         <com.hootsuite.nachos.NachoTextView
-                            android:id="@+id/symptoms"
+                            android:id="@+id/symptom_edit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:chipSpacing="2dp"

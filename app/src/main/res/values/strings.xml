@@ -61,6 +61,7 @@
     <string name="i_m_sad">I\'m Sad</string>
     <string name="enter_symptoms">Enter Your Symptoms</string>
     <string name="diagnosis">Diagnosis</string>
+    <string name="symptoms_tag">Symptoms</string>
 </resources>
 
 

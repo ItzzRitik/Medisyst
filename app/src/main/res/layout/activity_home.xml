@@ -66,9 +66,10 @@
                     <android.support.design.widget.FloatingActionButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="25dp"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginEnd="22dp"
                         android:src="@drawable/icon_mono"
-                        style="@style/SelectableItemBackgroundBorderless"
+                        app:rippleColor="@color/ripple"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"/>
                 </RelativeLayout>

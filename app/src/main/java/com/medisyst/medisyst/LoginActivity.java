@@ -299,11 +299,17 @@ public class LoginActivity extends AppCompatActivity {
             }},1500);
     }
     private void pulseAnimation(){
-        hearBeat= ObjectAnimator.ofPropertyValuesHolder(ico_splash, PropertyValuesHolder.ofFloat("scaleX", 1.5f), PropertyValuesHolder.ofFloat("scaleY", 1.5f));
-        hearBeat.setDuration(300);
-        hearBeat.setRepeatCount(ObjectAnimator.INFINITE);
-        hearBeat.setRepeatMode(ObjectAnimator.REVERSE);
-        hearBeat.start();}
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                ico_splash,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
+        scaleDown.setDuration(310);
+
+        scaleDown.setRepeatCount(5);
+        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
+
+        scaleDown.start();
+    }
     public void performSignIn()
     {
         showKeyboard(email,false);

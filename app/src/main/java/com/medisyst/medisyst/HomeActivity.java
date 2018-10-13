@@ -119,6 +119,8 @@ public class HomeActivity extends AppCompatActivity {
 
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);
+        symptom_edit.setChipTextColor(getResources().getColor(R.color.colorPrimary));
+        symptom_edit.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
         add = findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

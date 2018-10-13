@@ -87,11 +87,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:chipSpacing="2dp"
-                            app:chipBackground="@color/colorAccent"
+                            app:chipBackground="@color/colorAccentLight"
                             app:chipTextColor="@color/colorPrimary"
                             app:chipTextSize="16dp"
                             app:chipHeight="30dp"
-                            app:chipVerticalSpacing="3dp"/>
+                            app:chipVerticalSpacing="5dp"
+                            android:layout_margin="10dp"/>
                     </RelativeLayout>
                 </RelativeLayout>
             </android.support.v4.widget.SwipeRefreshLayout>

@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
     Point screenSize;
     ToolTipsManager toolTip;
     RecyclerView display;
-    List<Schemes> schemes;
+    List<People> schemes;
     WebView apply;
     double diagonal;
     OkHttpClient client;
@@ -264,16 +264,13 @@ public class HomeActivity extends AppCompatActivity {
                         schemes = new ArrayList<>();
                         for (int i = 0; i < postsArray.length(); i++) {
                             JSONObject pO = postsArray.getJSONObject(i);
-                            Log.v("error",pO.getString("img"));
-                            schemes.add(new Schemes(pO.getString("name"),pO.getString("endDate")
-                                    ,pO.getString("views"),pO.getString("description"),pO.getString("img")));
                         }
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
                                 if(Email==null){Email="aditya.aastha@gmail.com";}
                                 if(Aadhaar==null){Aadhaar="123456789123";}
-                                display.setAdapter(new SchemeAdapter(HomeActivity.this,schemes,Email,Aadhaar));
+
                             }
                         });
                     }

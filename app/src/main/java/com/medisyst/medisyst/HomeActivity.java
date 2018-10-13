@@ -133,9 +133,9 @@ public class HomeActivity extends AppCompatActivity {
                 float FinalY = (data_div.getHeight()/2)-(add.getHeight());
                 Path path = new Path();
                 path.moveTo(CurrentX, CurrentY);
-                path.quadTo(CurrentX*4/3, (CurrentY+FinalY)/2, FinalX, FinalY);
+                path.quadTo(CurrentX*4/3, (CurrentY+FinalY)*2/5, FinalX, FinalY);
                 startAnim = ObjectAnimator.ofFloat(add, View.X, View.Y, path);
-                startAnim.setDuration(800);
+                startAnim.setDuration(300);
                 startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
                 startAnim.start();
             }

@@ -261,7 +261,6 @@ public class HomeActivity extends AppCompatActivity {
                             symptoms[i]=pO.getString("Name");
                             sym_id[i]=pO.getString("ID");
                         }
-                        Log.w("arr", symptoms.toString());
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {

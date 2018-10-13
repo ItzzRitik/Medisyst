@@ -194,6 +194,15 @@
                                 android:layout_marginTop="15dp"
                                 android:textColor="@color/colorAccentLight"
                                 android:textSize="20sp"/>
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="55dp">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/disResult"/>
+                            </ScrollView>
                         </RelativeLayout>
                     </RelativeLayout>
                 </RelativeLayout>

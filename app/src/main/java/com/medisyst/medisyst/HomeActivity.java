@@ -41,6 +41,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hootsuite.nachos.NachoTextView;
+import com.hootsuite.nachos.chip.Chip;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
 import com.rm.rmswitch.RMSwitch;
 import com.tomergoldst.tooltips.ToolTipsManager;
@@ -66,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView ico_splash,menu,done,dob_chooser;
     EditText dob;
     RMSwitch gender;
-    TextView page_tag,symptoms_tag,gender_tag,diag_results;
+    TextView page_tag,symptoms_tag,gender_tag,diag_results,disResult;
     Animator animator;
     CardView data_div;
     ObjectAnimator startAnim;
@@ -78,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     OkHttpClient client;
     SwipeRefreshLayout refresh;
     FloatingActionButton add;
-    String Email="",Aadhaar="";
+    String r="";
     NachoTextView symptom_edit;
     String symptoms[],sym_id[];
     @Override
@@ -95,8 +96,6 @@ public class HomeActivity extends AppCompatActivity {
         data_div=findViewById(R.id.data_div);
         toolTip = new ToolTipsManager();
         client = new OkHttpClient();
-        Email=getIntent().getStringExtra("email");
-        Aadhaar=getIntent().getStringExtra("aadhaar");
 
         page_tag=findViewById(R.id.page_tag);
         page_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
@@ -115,7 +114,56 @@ public class HomeActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String ID="";
+                for (Chip chip : symptom_edit.getAllChips()) {
+                    ID=ID+sym_id[getIndex((chip.getText().toString()),symptoms)]+",";
+                }
+                String date=dob.getText().toString();
+                date=date.substring(date.length()-5,date.length()-1);
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/diagnosis").newBuilder();
+                urlBuilder.addQueryParameter("ID",ID);
+                urlBuilder.addQueryParameter("gender",gender_tag.getText().toString());
+                urlBuilder.addQueryParameter("DOB",date);
+                Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                        .addHeader("Content-Type", "application/json").build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        Log.w("failure", e.getMessage());
+                        call.cancel();
+                    }
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        assert response.body() != null;
+                        String mMessage = Objects.requireNonNull(response.body()).string();
+                        refresh.setRefreshing(false);
+                        if (response.isSuccessful()){
+                            try {
+                                JSONArray postsArray = new JSONArray(mMessage);
+                                for (int i = 0; i < postsArray.length(); i++) {
+                                    JSONObject res = postsArray.getJSONObject(i);
+                                    JSONObject issue = res.getJSONObject("Issue");
+                                    JSONObject spec = res.getJSONObject("Specialisation");
+                                    r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+                                    r=r+"Disease : "+issue.getString("Name")+"\n";
+                                    r=r+"Professional Name : "+issue.getString("ProfName")+"\n";
+                                    r=r+"Prediction Accuracy : "+issue.getString("Accuracy")+"%\n";
+                                    r=r+"Specialisation : "+spec.getString("Name")+"%\n";
+                                    r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+                                }
+                                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        disResult.setText(r);
+                                    }
+                                });
+                            }
+                            catch (JSONException e) {
+                                Log.w("error", e.toString());
+                            }
+                        }
+                    }
+                });
             }
         });
 
@@ -174,6 +222,8 @@ public class HomeActivity extends AppCompatActivity {
         diagnosis=findViewById(R.id.diagnosis);
         diag_results=findViewById(R.id.diag_results);
         diag_results.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        disResult=findViewById(R.id.disResult);
+        disResult.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
 
         symptom_edit=findViewById(R.id.symptom_edit);
         symptom_edit.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
@@ -313,6 +363,14 @@ public class HomeActivity extends AppCompatActivity {
 
                 }},1500);
         }
+    }
+    public int getIndex(String element,String arr[]){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i].equals(element)){
+                return i;
+            }
+        }
+        return -1;
     }
     public void prepareHistory(){
         Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()

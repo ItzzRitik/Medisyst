@@ -19,10 +19,9 @@
             android:fromDegrees="-10"
             android:pivotX="0%"
             android:pivotY="100%">
-            <shape
-                android:shape="rectangle">
-                <solid android:color="#fff"/>
-            </shape>
+            <bitmap  android:gravity="center" android:src="@mipmap/back_profile"
+                android:tileMode="repeat" />
+
         </rotate>
     </item>
 </layer-list>

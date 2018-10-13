@@ -68,8 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     Point screenSize;
     ToolTipsManager toolTip;
     RecyclerView display;
-    List<History> schemes;
-    WebView apply;
+    List<History> history;
     double diagonal;
     OkHttpClient client;
     SwipeRefreshLayout refresh;
@@ -117,57 +116,19 @@ public class HomeActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        prepareSchemes();
+
                     }
                 }
         );
 
-        schemes = new ArrayList<>();
+        history = new ArrayList<>();
         display=findViewById(R.id.display);
-        prepareSchemes();
+        prepareHistory();
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
         display.setLayoutManager(mLayoutManager);
         display.addItemDecoration(new GridSpacingItemDecoration(1,dptopx(10),true));
         display.setItemAnimator(new DefaultItemAnimator());
 
-        apply=findViewById(R.id.apply);
-        WebSettings settings = apply.getSettings();
-        settings.setDefaultTextEncodingName("utf-8");
-        settings.setJavaScriptEnabled(true);
-        settings.setAllowFileAccess(true);
-        settings.setBuiltInZoomControls(true);
-        settings.setDisplayZoomControls(false);
-        settings.setLoadsImagesAutomatically(true);
-        settings.setAppCacheEnabled(true);
-        settings.setAppCachePath(HomeActivity.this.getCacheDir().getPath());
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setPluginState(WebSettings.PluginState.ON);
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        settings.setGeolocationEnabled(true);
-        settings.setSaveFormData(true);
-        settings.setDomStorageEnabled(true);
-        settings.setUserAgentString("Mozilla/5.0 (Linux; Android "+ Build.VERSION.RELEASE+"; "+Build.MODEL+" Build/"+Build.ID+") AppleWebKit/537.36 (KHTML, like Gecko) Chrome/ Mobile Safari/537.36");
-
-        apply.setWebChromeClient(new WebChromeClient());
-        apply.setScrollbarFadingEnabled(true);
-        apply.setWebViewClient(new WebViewClient(){
-            @SuppressWarnings("deprecation")
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl){ }
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error){handler.proceed();}
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {}
-            @Override
-            public void onPageFinished(WebView view, String url){ }
-            @Override
-            public void onLoadResource(WebView view, String url) {}
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) { return false; }
-
-        });
-        //apply.loadUrl("https://goo.gl/forms/zVE1Eg8xqin4WU5f2");
 
         if(getIntent().getBooleanExtra("isProfile",false))
         {
@@ -239,7 +200,7 @@ public class HomeActivity extends AppCompatActivity {
                 }},1500);
         }
     }
-    public void prepareSchemes(){
+    public void prepareHistory(){
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://nodeexercise-adityabhardwaj.c9users.io/schemes").newBuilder();
         urlBuilder.addQueryParameter("email",getIntent().getStringExtra("email"));
         Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
@@ -258,7 +219,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     try {
                         JSONArray postsArray = new JSONArray(mMessage);
-                        schemes = new ArrayList<>();
+                        history = new ArrayList<>();
                         for (int i = 0; i < postsArray.length(); i++) {
                             JSONObject pO = postsArray.getJSONObject(i);
                         }

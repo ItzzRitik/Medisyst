@@ -237,30 +237,7 @@
                             android:layout_marginEnd="15dp"
                             android:layout_below="@+id/aadhaar"
                             android:background="#616161"/>
-                        <EditText
-                            android:id="@+id/occ"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_below="@+id/divider4"
-                            android:layout_marginStart="5dp"
-                            android:textColor="#616161"
-                            android:drawablePadding="12dp"
-                            android:backgroundTint="#fff"
-                            android:drawableStart="@drawable/job"
-                            android:hint="@string/occ"
-                            android:inputType="textPersonName"
-                            android:textColorHint="#c7c7c7"
-                            android:maxLines="1"
-                            android:paddingEnd="20dp"
-                            android:paddingStart="10dp"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:id="@+id/divider5"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginEnd="15dp"
-                            android:layout_below="@+id/occ"
-                            android:background="#616161"/>
+
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

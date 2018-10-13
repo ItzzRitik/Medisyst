@@ -3,6 +3,7 @@
     package="com.medisyst.medisyst">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -17,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

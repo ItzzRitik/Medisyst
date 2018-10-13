@@ -52,7 +52,6 @@ import android.widget.Toast;
 
 import com.google.android.cameraview.CameraView;
 import com.google.android.cameraview.CameraViewImpl;
-import com.google.android.flexbox.FlexboxLayout;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.rm.rmswitch.RMSwitch;
 import com.tomergoldst.tooltips.ToolTip;
@@ -66,9 +65,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-import fisk.chipcloud.ChipCloud;
-import fisk.chipcloud.ChipCloudConfig;
-import fisk.chipcloud.ChipListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -101,7 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
     ToolTipsManager toolTip;
     Bitmap profile_dp=null;
     double diagonal;
-    ChipCloud inter;
     OkHttpClient client;
     boolean tags[]={false,false,false,false,false,false,false,false,false
             ,false,false,false,false,false,false,false,false,false,false,false};
@@ -417,10 +412,6 @@ public class ProfileActivity extends AppCompatActivity {
                 .add("gender", gender_tag.getText().toString()+"")
                 .add("dob", dob.getText().toString()+"")
                 .add("aadhar", aadhaar.getText().toString()+"");
-        for(int i=0;i<tags.length;i++){
-            if(tags[i])
-                postBody.add("tags["+(tag++)+"]", ""+inter.getLabel(i));
-        }
         RequestBody formBody = postBody.build();
 
         Log.i("sign",postBody.toString());

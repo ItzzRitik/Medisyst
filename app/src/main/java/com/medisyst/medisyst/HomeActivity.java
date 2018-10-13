@@ -118,8 +118,9 @@ public class HomeActivity extends AppCompatActivity {
                 for (Chip chip : symptom_edit.getAllChips()) {
                     ID=ID+sym_id[getIndex((chip.getText().toString()),symptoms)]+",";
                 }
+                ID=ID.substring(0,ID.length()-1);
                 String date=dob.getText().toString();
-                date=date.substring(date.length()-5,date.length()-1);
+                date=date.substring(date.length()-4,date.length());
                 HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/diagnosis").newBuilder();
                 urlBuilder.addQueryParameter("ID",ID);
                 urlBuilder.addQueryParameter("gender",gender_tag.getText().toString());
@@ -140,8 +141,9 @@ public class HomeActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             try {
                                 JSONArray postsArray = new JSONArray(mMessage);
+                                Log.e("diag", postsArray.toString() );
                                 for (int i = 0; i < postsArray.length(); i++) {
-                                    JSONObject res = postsArray.getJSONObject(i);
+                                    JSONObject res = new JSONArray((postsArray.getJSONObject(i)).toString()).getJSONObject(i);
                                     JSONObject issue = res.getJSONObject("Issue");
                                     JSONObject spec = res.getJSONObject("Specialisation");
                                     r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
@@ -151,6 +153,7 @@ public class HomeActivity extends AppCompatActivity {
                                     r=r+"Specialisation : "+spec.getString("Name")+"%\n";
                                     r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
                                 }
+                                Log.e("diag", r );
                                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                                     @Override
                                     public void run() {

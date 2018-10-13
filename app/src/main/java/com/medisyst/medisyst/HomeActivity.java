@@ -31,6 +31,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Interpolator;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ import okhttp3.Response;
 public class HomeActivity extends AppCompatActivity {
     RelativeLayout logo_div,splash_cover,diagnosis;
     ImageView ico_splash,menu,done;
+    EditText dob;
     TextView page_tag;
     Animator animator;
     CardView data_div;
@@ -117,6 +119,9 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        dob=findViewById(R.id.dob);
+        dob.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
 
         diagnosis=findViewById(R.id.diagnosis);
         symptom_edit=findViewById(R.id.symptom_edit);

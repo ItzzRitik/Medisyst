@@ -27,7 +27,8 @@ dependencies {
     implementation 'com.rm:rmswitch:1.2.2'
     implementation 'com.github.fiskurgit:ChipCloud:3.0.5'
     implementation 'com.google.android:flexbox:1.0.0'
-
+    implementation 'com.github.yalantis:ucrop:2.2.2'
+    implementation 'com.tomergoldst.android:tooltips:1.0.6'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

@@ -37,7 +37,7 @@
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:layout_alignParentTop="true"
-                android:textSize="26sp"/>
+                android:textSize="22sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

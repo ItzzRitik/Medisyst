@@ -214,9 +214,12 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState())
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.close));
+                    done.setImageDrawable(getDrawable(R.drawable.close));prepareHistory();
                 }
-
+                else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.close)).getConstantState())
+                {
+                    done.setImageDrawable(getDrawable(R.drawable.key));prepareHistory();
+                }
             }
         });
 

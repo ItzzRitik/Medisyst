@@ -41,7 +41,6 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
             name = view.findViewById(R.id.name);
             name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2_bold.otf"));
             key = view.findViewById(R.id.key);
-            key.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             accept = view.findViewById(R.id.accept);
             accept.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             reject = view.findViewById(R.id.reject);

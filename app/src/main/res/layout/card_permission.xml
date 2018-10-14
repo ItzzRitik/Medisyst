@@ -36,13 +36,14 @@
                 android:text="@string/name_doctor"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
-                android:textSize="18sp"/>
+                android:textSize="22sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/key"
                 android:textStyle="italic"
                 android:text="@string/generated_key"
+                android:fontFamily="sans-serif"
                 android:layout_below="@+id/name"
                 android:textSize="12sp"
                 android:layout_marginBottom="0dp"/>

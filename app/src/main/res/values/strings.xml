@@ -64,6 +64,8 @@
     <string name="symptoms_tag">Symptoms</string>
     <string name="doc_name">Doctor\'s Name</string>
     <string name="results">Results</string>
+    <string name="name_doctor">Name of Doctor</string>
+    <string name="generated_key">(Generated Key)</string>
 </resources>
 
 

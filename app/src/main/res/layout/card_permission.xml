@@ -43,7 +43,6 @@
                 android:id="@+id/key"
                 android:textStyle="italic"
                 android:text="@string/generated_key"
-                android:fontFamily="sans-serif"
                 android:layout_below="@+id/name"
                 android:textSize="12sp"
                 android:layout_marginBottom="0dp"/>

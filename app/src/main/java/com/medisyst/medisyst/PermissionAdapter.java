@@ -41,6 +41,7 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
             name = view.findViewById(R.id.name);
             name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2_bold.otf"));
             key = view.findViewById(R.id.key);
+            key.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             accept = view.findViewById(R.id.accept);
             accept.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             reject = view.findViewById(R.id.reject);
@@ -65,7 +66,7 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
         final Permission item = permission.get(position);
         holder.thumbnail.setImageDrawable(homeActivity.getDrawable(thumb[random.nextInt(thumb.length-1)]));
         holder.name.setText(item.getName());
-        holder.key.setText(item.getKey());
+        holder.key.setText("Key : "+item.getKey());
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -426,81 +426,87 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         //Generating Symptom Array
-        Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
-                .addHeader("Content-Type", "application/json").build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.w("failure", e.getMessage());
-                call.cancel();
-            }
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                assert response.body() != null;
-                String mMessage = Objects.requireNonNull(response.body()).string();
-                refresh.setRefreshing(false);
-                if (response.isSuccessful()){
-                    try {
-                        JSONArray postsArray = new JSONArray(mMessage);
-                        symptoms = new String[postsArray.length()];
-                        sym_id = new String[postsArray.length()];
-                        for (int i = 0; i < postsArray.length(); i++) {
-                            JSONObject pO = postsArray.getJSONObject(i);
-                            symptoms[i]=pO.getString("Name");
-                            sym_id[i]=pO.getString("ID");
-                        }
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                symptom_edit.setAdapter(new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms));
+        if(done.getDrawable().getConstantState()==getDrawable(R.drawable.tick_mono).getConstantState())
+        {
+            Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
+                    .addHeader("Content-Type", "application/json").build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.w("failure", e.getMessage());
+                    call.cancel();
+                }
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    assert response.body() != null;
+                    String mMessage = Objects.requireNonNull(response.body()).string();
+                    refresh.setRefreshing(false);
+                    if (response.isSuccessful()){
+                        try {
+                            JSONArray postsArray = new JSONArray(mMessage);
+                            symptoms = new String[postsArray.length()];
+                            sym_id = new String[postsArray.length()];
+                            for (int i = 0; i < postsArray.length(); i++) {
+                                JSONObject pO = postsArray.getJSONObject(i);
+                                symptoms[i]=pO.getString("Name");
+                                sym_id[i]=pO.getString("ID");
                             }
-                        });
-                    }
-                    catch (JSONException e) {
-                        Log.w("error", e.toString());
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    symptom_edit.setAdapter(new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms));
+                                }
+                            });
+                        }
+                        catch (JSONException e) {
+                            Log.w("error", e.toString());
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        //Generating History Page
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/history").newBuilder();
-        urlBuilder.addQueryParameter("email","Aditya@gmail.com");
-        request = new Request.Builder().url(urlBuilder.build().toString()).get()
-                .addHeader("Content-Type", "application/json").build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.w("failure", e.getMessage());
-                call.cancel();
-            }
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                assert response.body() != null;
-                String mMessage = Objects.requireNonNull(response.body()).string();
-                refresh.setRefreshing(false);
-                if (response.isSuccessful()){
-                    try {
-                        JSONArray postsArray = new JSONArray(mMessage);
-                        history = new ArrayList<>();
-                        for (int i = 0; i < postsArray.length(); i++) {
-                            JSONObject res = postsArray.getJSONObject(i);
-                            history.add(new History(res.getString("name"),res.getString("date")
-                                    ,res.getString("profname"),res.getString("docname"),res.getString("treatment")));
-                        }
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                display.setAdapter(new HistoryAdapter(HomeActivity.this,history));
+            //Generating History Page
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/history").newBuilder();
+            urlBuilder.addQueryParameter("email","Aditya@gmail.com");
+            request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                    .addHeader("Content-Type", "application/json").build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.w("failure", e.getMessage());
+                    call.cancel();
+                }
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    assert response.body() != null;
+                    String mMessage = Objects.requireNonNull(response.body()).string();
+                    refresh.setRefreshing(false);
+                    if (response.isSuccessful()){
+                        try {
+                            JSONArray postsArray = new JSONArray(mMessage);
+                            history = new ArrayList<>();
+                            for (int i = 0; i < postsArray.length(); i++) {
+                                JSONObject res = postsArray.getJSONObject(i);
+                                history.add(new History(res.getString("name"),res.getString("date")
+                                        ,res.getString("profname"),res.getString("docname"),res.getString("treatment")));
                             }
-                        });
-                    }
-                    catch (JSONException e) {
-                        Log.w("error", e.toString());
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    display.setAdapter(new HistoryAdapter(HomeActivity.this,history));
+                                }
+                            });
+                        }
+                        catch (JSONException e) {
+                            Log.w("error", e.toString());
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else{
+
+        }
     }
     public void scaleX(final View view,int x,int t, Interpolator interpolator)
     {

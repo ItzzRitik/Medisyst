@@ -237,11 +237,12 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:id="@+id/done"
-            android:src="@drawable/tick_mono"
+            android:src="@drawable/key"
             android:layout_above="@+id/data_div"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="18dp"
             android:layout_marginEnd="25dp"
-            android:visibility="gone"/>
+            android:visibility="invisible"
+            style="@style/SelectableItemBackgroundBorderless"/>
     </RelativeLayout>
 </RelativeLayout>

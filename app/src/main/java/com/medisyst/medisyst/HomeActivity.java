@@ -302,6 +302,7 @@ public class HomeActivity extends AppCompatActivity {
         {
             splash_cover.setVisibility(View.GONE);
             logo_div.setVisibility(View.VISIBLE);
+            done.setVisibility(View.VISIBLE);
             page_tag.setVisibility(View.VISIBLE);
             menu.setVisibility(View.VISIBLE);
             scaleY(data_div,getIntent().getIntExtra("divHeight",0),0,new AccelerateDecelerateInterpolator());
@@ -354,7 +355,7 @@ public class HomeActivity extends AppCompatActivity {
                             AlphaAnimation anims = new AlphaAnimation(0,1);anims.setDuration(400);
                             page_tag.setVisibility(View.VISIBLE);page_tag.startAnimation(anims);
                             menu.setVisibility(View.VISIBLE);menu.startAnimation(anims);
-                            done.startAnimation(anims);
+                            done.setVisibility(View.VISIBLE);done.startAnimation(anims);
                         }},400);
                     new Handler().postDelayed(new Runnable() {
                         @Override

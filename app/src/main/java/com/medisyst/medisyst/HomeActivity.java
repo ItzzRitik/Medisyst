@@ -215,11 +215,11 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState())
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.close));prepareHistory();
+                    done.setImageDrawable(getDrawable(R.drawable.close));prepareHistory(false);
                 }
                 else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.close)).getConstantState())
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.key));prepareHistory();
+                    done.setImageDrawable(getDrawable(R.drawable.key));prepareHistory(false);
                 }
             }
         });
@@ -229,7 +229,7 @@ public class HomeActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        prepareHistory();
+                        prepareHistory(false);
                     }
                 }
         );
@@ -422,6 +422,7 @@ public class HomeActivity extends AppCompatActivity {
                         }},800);
 
                 }},1500);
+            prepareHistory(true);
         }
     }
     public int getIndex(String element,String arr[]){
@@ -432,10 +433,10 @@ public class HomeActivity extends AppCompatActivity {
         }
         return -1;
     }
-    public void prepareHistory(){
+    public void prepareHistory(Boolean hist){
         //Generating Symptom Array
         Toast.makeText(this, "History Started", Toast.LENGTH_SHORT).show();
-        if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState())
+        if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState() || hist)
         {
             Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
             Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()

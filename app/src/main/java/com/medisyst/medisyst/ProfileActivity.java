@@ -83,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView dp_cover,ico_splash,done,camera_flip,click,flash,dob_chooser;
     Button allow_camera;
     Animation anim;
-    TextView page_tag,gender_tag;
+    TextView page_tag,gender_tag,appNameSplash;
     EditText f_name,l_name,dob,aadhaar;
     RMSwitch gender;
     Point screenSize;
@@ -167,6 +167,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         page_tag=findViewById(R.id.page_tag);
         page_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+
+        appNameSplash=findViewById(R.id.appNameSplash);
+        appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
 
         ico_splash=findViewById(R.id.ico_splash);
         ico_splash.setScaleType(ImageView.ScaleType.CENTER);

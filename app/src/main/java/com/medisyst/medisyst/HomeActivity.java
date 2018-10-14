@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     EditText dob;
     RMSwitch gender;
     float fabX,fabY;
-    TextView page_tag,symptoms_tag,gender_tag,diag_results,disResult;
+    TextView page_tag,symptoms_tag,gender_tag,diag_results,disResult,appNameSplash;
     Animator animator;
     CardView data_div;
     ObjectAnimator startAnim;
@@ -104,6 +104,8 @@ public class HomeActivity extends AppCompatActivity {
 
         page_tag=findViewById(R.id.page_tag);
         page_tag.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        appNameSplash=findViewById(R.id.appNameSplash);
+        appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
 
         ico_splash=findViewById(R.id.ico_splash);
         ico_splash.setScaleType(ImageView.ScaleType.CENTER);

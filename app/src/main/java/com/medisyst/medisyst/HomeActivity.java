@@ -76,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
     ToolTipsManager toolTip;
     RecyclerView display;
     List<History> history;
+    List<Permission> permission;
     double diagonal;
     OkHttpClient client;
     SwipeRefreshLayout refresh;
@@ -426,7 +427,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         //Generating Symptom Array
-        if(done.getDrawable().getConstantState()==getDrawable(R.drawable.tick_mono).getConstantState())
+        if(done.getDrawable().getConstantState()==getDrawable(R.drawable.key).getConstantState())
         {
             Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
                     .addHeader("Content-Type", "application/json").build();
@@ -504,8 +505,44 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
         }
-        else{
-
+        else if(done.getDrawable().getConstantState()==getDrawable(R.drawable.close).getConstantState())
+        {
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/KEY").newBuilder();
+            urlBuilder.addQueryParameter("email","Aditya@gmail.com");
+            Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                    .addHeader("Content-Type", "application/json").build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.w("failure", e.getMessage());
+                    call.cancel();
+                }
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    assert response.body() != null;
+                    String mMessage = Objects.requireNonNull(response.body()).string();
+                    refresh.setRefreshing(false);
+                    if (response.isSuccessful()){
+                        try {
+                            JSONArray postsArray = new JSONArray(mMessage);
+                            permission = new ArrayList<>();
+                            for (int i = 0; i < postsArray.length(); i++) {
+                                JSONObject res = postsArray.getJSONObject(i);
+                                permission.add(new Permission(res.getString("name"),res.getString("key")));
+                            }
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    display.setAdapter(new PermissionAdapter(HomeActivity.this,permission));
+                                }
+                            });
+                        }
+                        catch (JSONException e) {
+                            Log.w("error", e.toString());
+                        }
+                    }
+                }
+            });
         }
     }
     public void scaleX(final View view,int x,int t, Interpolator interpolator)

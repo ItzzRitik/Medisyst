@@ -47,23 +47,25 @@
                 android:textSize="12sp"
                 android:layout_marginBottom="0dp"/>
             <TextView
-                android:layout_width="70dp"
-                android:layout_height="20dp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/accept"
                 android:text="@string/accept"
                 android:gravity="center"
+                android:textColor="@color/green"
                 android:background="@drawable/signin_green"/>
             <TextView
-                android:layout_width="70dp"
-                android:layout_height="20dp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:id="@+id/reject"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="80dp"
                 android:text="@string/reject"
                 android:gravity="center"
+                android:textColor="@color/colorAccent"
                 android:background="@drawable/signin"/>
         </RelativeLayout>
     </LinearLayout>

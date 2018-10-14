@@ -28,7 +28,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
             date = view.findViewById(R.id.date);
             date.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             prof_name = view.findViewById(R.id.prof_name);
-            prof_name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
+            //prof_name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             solution = view.findViewById(R.id.solution);
             solution.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             doc_name= view.findViewById(R.id.doc_name);
@@ -54,9 +54,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         holder.thumbnail.setImageDrawable(homeActivity.getDrawable(thumb[random.nextInt(thumb.length-1)]));
         holder.name.setText(item.getName());
         holder.date.setText(item.getDate());
-        holder.prof_name.setText(item.getProfName());
-        holder.solution.setText(item.getSolution());
-        holder.doc_name.setText(item.getdocName());
+        holder.prof_name.setText("profName : "+item.getProfName());
+        holder.doc_name.setText("Doctor : Dr."+item.getdocName());
+        holder.solution.setText("Treatment : "+item.getSolution());
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

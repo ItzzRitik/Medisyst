@@ -381,7 +381,7 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     AlphaAnimation anims = new AlphaAnimation(0,1);anims.setDuration(1000);
-                    display.setVisibility(View.VISIBLE);//display.startAnimation(anims);
+                    display.setVisibility(View.VISIBLE);display.startAnimation(anims);
                 }},800);
         }
         else{
@@ -465,7 +465,6 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         //Generating Symptom Array
-        display.setAdapter(null);
         if(key==0)
         {
             Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()

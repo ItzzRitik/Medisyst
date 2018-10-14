@@ -90,7 +90,7 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
-
+                                    homeActivity.refresh.setRefreshing(true);
                                 }
                             });
                         }
@@ -121,6 +121,7 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    homeActivity.refresh.setRefreshing(true);
                                 }
                             });
                         }

@@ -37,7 +37,7 @@
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:layout_alignParentTop="true"
-                android:textSize="22sp"/>
+                android:textSize="24sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 android:id="@+id/doc_name"
                 android:text="@string/doc_name"
                 android:layout_below="@+id/prof_name"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:layout_width="match_parent"
@@ -61,12 +61,13 @@
                 android:id="@+id/solution"
                 android:text="@string/solution"
                 android:layout_below="@+id/doc_name"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/date"
+                android:textStyle="bold"
                 android:text="@string/date"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"/>

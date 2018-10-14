@@ -409,6 +409,7 @@ public class HomeActivity extends AppCompatActivity {
                             logo_div.setBackgroundColor((int) animator.getAnimatedValue());
                         }
                     });
+                    colorAnimation.start();
                     startAnim.start();
                     ico_splash.animate().scaleX(0f).scaleY(0f).setDuration(1000).start();
                     new Handler().postDelayed(new Runnable() {

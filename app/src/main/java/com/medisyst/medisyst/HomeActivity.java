@@ -133,13 +133,14 @@ public class HomeActivity extends AppCompatActivity {
                         @Override public void onAnimationRepeat(Animator animator) {}
                         @Override public void onAnimationEnd(Animator animator) {
                             diagnosis.setVisibility(View.GONE);
+                            page_tag.setText(R.string.home);
                             done.setImageDrawable(getDrawable(R.drawable.key));
                             menu.setImageDrawable(getDrawable(R.drawable.menu));
                             float CurrentX = add.getX();
                             float CurrentY = add.getY();
                             Path path = new Path();
                             path.moveTo(CurrentX, CurrentY);
-                            path.quadTo(CurrentX*3/5, (CurrentY+fabY)*3/7, fabX, fabY);
+                            path.quadTo(CurrentX*3/7, (CurrentY+fabY)*4/6, fabX, fabY);
                             startAnim = ObjectAnimator.ofFloat(add, View.X, View.Y, path);
                             startAnim.setDuration(300);
                             startAnim.setInterpolator(new AccelerateDecelerateInterpolator());

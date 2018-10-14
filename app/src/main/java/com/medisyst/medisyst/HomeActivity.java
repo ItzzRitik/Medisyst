@@ -492,8 +492,9 @@ public class HomeActivity extends AppCompatActivity {
             });
 
             //Generating History Page
+            if(Email.equals("")){Email="aditya@gmail.com";}
             HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/history").newBuilder();
-            urlBuilder.addQueryParameter("email","Aditya@gmail.com");
+            urlBuilder.addQueryParameter("email",Email);
             request = new Request.Builder().url(urlBuilder.build().toString()).get()
                     .addHeader("Content-Type", "application/json").build();
             client.newCall(request).enqueue(new Callback() {

@@ -39,6 +39,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hootsuite.nachos.NachoTextView;
 import com.hootsuite.nachos.chip.Chip;
@@ -349,7 +350,6 @@ public class HomeActivity extends AppCompatActivity {
 
         history = new ArrayList<>();
         display=findViewById(R.id.display);
-        prepareHistory();
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
         display.setLayoutManager(mLayoutManager);
         display.addItemDecoration(new GridSpacingItemDecoration(1,dptopx(10),true));
@@ -434,8 +434,10 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         //Generating Symptom Array
+        Toast.makeText(this, "History Started", Toast.LENGTH_SHORT).show();
         if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState())
         {
+            Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
             Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
                     .addHeader("Content-Type", "application/json").build();
             client.newCall(request).enqueue(new Callback() {

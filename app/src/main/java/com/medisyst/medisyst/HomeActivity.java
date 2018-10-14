@@ -370,7 +370,6 @@ public class HomeActivity extends AppCompatActivity {
 
         if(getIntent().getBooleanExtra("isProfile",false))
         {
-            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
             splash_cover.setVisibility(View.GONE);
             logo_div.setVisibility(View.VISIBLE);
             done.setVisibility(View.VISIBLE);
@@ -385,7 +384,6 @@ public class HomeActivity extends AppCompatActivity {
                 }},800);
         }
         else{
-            Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -464,6 +462,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
     public void prepareHistory(){
+        Email=(getIntent().getStringExtra("email")).trim();
         //Generating Symptom Array
         if(key==0)
         {
@@ -505,8 +504,6 @@ public class HomeActivity extends AppCompatActivity {
             });
 
             //Generating History Page
-            if(Email.equals("")){Email="Aditya@gmail.com";}
-
             HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/history").newBuilder();
             urlBuilder.addQueryParameter("email",Email);
             request = new Request.Builder().url(urlBuilder.build().toString()).get()
@@ -585,6 +582,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         else if(key==1)
         {
+            Toast.makeText(this, "key", Toast.LENGTH_SHORT).show();
             HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/key").newBuilder();
             urlBuilder.addQueryParameter("email","Aditya@gmail.com");
             Request request = new Request.Builder().url(urlBuilder.build().toString()).get()

@@ -374,7 +374,7 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     AlphaAnimation anims = new AlphaAnimation(0,1);anims.setDuration(1000);
-                    display.setVisibility(View.VISIBLE);display.startAnimation(anims);
+                    display.setVisibility(View.VISIBLE);//display.startAnimation(anims);
                 }},800);
         }
         else{
@@ -398,11 +398,17 @@ public class HomeActivity extends AppCompatActivity {
                     startAnim.setDuration(800);
                     startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
 
-                    AlphaAnimation anims = new AlphaAnimation(0.6f,1);
-                    anims.setDuration(1000);
-                    anims.setFillAfter(true);
-                    anims.setInterpolator(new AccelerateDecelerateInterpolator());
-                    logo_div.startAnimation(anims);
+                    int colorFrom = getResources().getColor(R.color.colorPrimary);
+                    int colorTo = getResources().getColor(R.color.colorAccentLight);
+                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                    colorAnimation.setDuration(1000);
+                    colorAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            logo_div.setBackgroundColor((int) animator.getAnimatedValue());
+                        }
+                    });
                     startAnim.start();
                     ico_splash.animate().scaleX(0f).scaleY(0f).setDuration(1000).start();
                     new Handler().postDelayed(new Runnable() {

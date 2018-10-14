@@ -430,10 +430,11 @@ public class ProfileActivity extends AppCompatActivity {
                 if(Integer.parseInt(Objects.requireNonNull(response.body()).string())==1 && response.isSuccessful()){
                     Intent home=new Intent(ProfileActivity.this,HomeActivity.class);
                     home.putExtra("isProfile",true);
+                    home.putExtra("divHeight",pxtodp(data_div.getHeight()));
                     home.putExtra("email",ProfileActivity.this.getIntent().getStringExtra("email"));
                     ProfileActivity.this.startActivity(home);
-                    finish();
                     ProfileActivity.this.overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                    finish();
                 }
                 else{
                     Toast.makeText(ProfileActivity.this, response.toString(), Toast.LENGTH_SHORT).show();

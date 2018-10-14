@@ -435,14 +435,15 @@ public class HomeActivity extends AppCompatActivity {
                         JSONArray postsArray = new JSONArray(mMessage);
                         history = new ArrayList<>();
                         for (int i = 0; i < postsArray.length(); i++) {
-                            JSONObject pO = postsArray.getJSONObject(i);
-                            //history.add();
+                            JSONObject res = postsArray.getJSONObject(i);
+                            history.add(new History(res.getString("name"),res.getString("date")
+                                    ,res.getString("profname"),res.getString("docname"),res.getString("treatment")));
                         }
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms);
-                                symptom_edit.setAdapter(adapter);
+                                display.setAdapter(new HistoryAdapter(HomeActivity.this,history));
+                                symptom_edit.setAdapter(new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms));
                             }
                         });
                     }

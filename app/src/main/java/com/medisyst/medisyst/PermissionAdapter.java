@@ -101,6 +101,32 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
         holder.reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/reject").newBuilder();
+                urlBuilder.addQueryParameter("key",item.getKey());
+                Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                        .addHeader("Content-Type", "application/json").build();
+                homeActivity.client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        Log.i("key", e.getMessage());
+                        call.cancel();
+                    }
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        assert response.body() != null;
+                        if(Integer.parseInt(Objects.requireNonNull(response.body()).string())==1 && response.isSuccessful()){
+                            Log.i("key","Request Rejected");
+                        }
+                        else{
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
     }

@@ -520,7 +520,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         else if(key==1)
         {
-            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/KEY").newBuilder();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/key").newBuilder();
             urlBuilder.addQueryParameter("email","Aditya@gmail.com");
             Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
                     .addHeader("Content-Type", "application/json").build();

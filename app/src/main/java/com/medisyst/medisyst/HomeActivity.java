@@ -582,9 +582,8 @@ public class HomeActivity extends AppCompatActivity {
         }
         else if(key==1)
         {
-            Toast.makeText(this, "key", Toast.LENGTH_SHORT).show();
             HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/key").newBuilder();
-            urlBuilder.addQueryParameter("email","Aditya@gmail.com");
+            urlBuilder.addQueryParameter("email",Email);
             Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
                     .addHeader("Content-Type", "application/json").build();
             client.newCall(request).enqueue(new Callback() {

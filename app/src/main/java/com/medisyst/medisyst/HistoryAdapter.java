@@ -24,7 +24,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.MyViewHo
         MyViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.name);
-            name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
+            name.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2_bold.otf"));
             date = view.findViewById(R.id.date);
             date.setTypeface(Typeface.createFromAsset(homeActivity.getAssets(), "fonts/exo2.ttf"));
             prof_name = view.findViewById(R.id.prof_name);

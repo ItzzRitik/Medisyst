@@ -54,7 +54,7 @@
                 android:text="@string/doc_name"
                 android:layout_below="@+id/prof_name"
                 android:textSize="14sp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="5dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

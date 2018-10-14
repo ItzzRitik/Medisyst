@@ -464,7 +464,8 @@ public class HomeActivity extends AppCompatActivity {
     public void prepareHistory(){
         //Generating Symptom Array
         if(key==0)
-        { Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
+        {
+            Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
                     .addHeader("Content-Type", "application/json").build();
             client.newCall(request).enqueue(new Callback() {
                 @Override

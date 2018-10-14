@@ -217,11 +217,11 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 else if(key==0)
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.close));prepareHistory();key=1;
+                    done.setImageDrawable(getDrawable(R.drawable.close));key=1;prepareHistory();
                 }
                 else if(key==1)
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.key));prepareHistory();key=0;
+                    done.setImageDrawable(getDrawable(R.drawable.key));key=0;prepareHistory();
                 }
             }
         });

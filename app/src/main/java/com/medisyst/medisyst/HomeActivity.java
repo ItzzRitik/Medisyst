@@ -218,6 +218,7 @@ public class HomeActivity extends AppCompatActivity {
                 else if(key==0)
                 {
                     done.setImageDrawable(getDrawable(R.drawable.close));key=1;
+                    refresh.setRefreshing(true);
                     page_tag.setText(R.string.request);prepareHistory();
                 }
                 else if(key==1)

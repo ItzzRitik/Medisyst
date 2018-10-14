@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
     OkHttpClient client;
     SwipeRefreshLayout refresh;
     FloatingActionButton add;
-    String r="",Email;
+    String r="",Email="",Gender="",DOB="";
     NachoTextView symptom_edit;
     String symptoms[],sym_id[];
     int key=0;
@@ -332,6 +332,10 @@ public class HomeActivity extends AppCompatActivity {
                         done.setImageDrawable(getDrawable(R.drawable.tick_mono));
                         menu.setImageDrawable(getDrawable(R.drawable.back));
                         diagnosis.setVisibility(View.VISIBLE);
+                        dob.setText(DOB);
+                        if(Gender.equals(gender_tag.getText().toString())){
+                            gender.performClick();
+                        }
                         int cx = data_div.getWidth()/2;
                         int cy = data_div.getHeight()/2;
                         int finalRadius = Math.max(data_div.getWidth(), data_div.getHeight());
@@ -498,7 +502,8 @@ public class HomeActivity extends AppCompatActivity {
             });
 
             //Generating History Page
-            if(Email==null){Email="Aditya@gmail.com";}
+            if(Email.equals("")){Email="Aditya@gmail.com";}
+
             HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/history").newBuilder();
             urlBuilder.addQueryParameter("email",Email);
             request = new Request.Builder().url(urlBuilder.build().toString()).get()
@@ -522,6 +527,44 @@ public class HomeActivity extends AppCompatActivity {
                                 JSONObject res = postsArray.getJSONObject(i);
                                 history.add(new History(res.getString("name"),res.getString("date")
                                         ,res.getString("profname"),res.getString("docname"),res.getString("treatment")));
+                            }
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    display.setAdapter(new HistoryAdapter(HomeActivity.this,history));
+                                }
+                            });
+                        }
+                        catch (JSONException e) {
+                            Log.w("error", e.toString());
+                        }
+                    }
+                }
+            });
+
+            urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/details").newBuilder();
+            urlBuilder.addQueryParameter("email",Email);
+            request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                    .addHeader("Content-Type", "application/json").build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.w("failure", e.getMessage());
+                    call.cancel();
+                }
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    assert response.body() != null;
+                    String mMessage = Objects.requireNonNull(response.body()).string();
+                    refresh.setRefreshing(false);
+                    if (response.isSuccessful()){
+                        try {
+                            JSONArray postsArray = new JSONArray(mMessage);
+                            history = new ArrayList<>();
+                            for (int i = 0; i < postsArray.length(); i++) {
+                                JSONObject res = postsArray.getJSONObject(i);
+                                Gender=res.getString("gender");
+                                DOB=res.getString("dob");
                             }
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override

@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView ico_splash,menu,done,dob_chooser;
     EditText dob;
     RMSwitch gender;
+    float fabX,fabY;
     TextView page_tag,symptoms_tag,gender_tag,diag_results,disResult;
     Animator animator;
     CardView data_div;
@@ -131,13 +132,14 @@ public class HomeActivity extends AppCompatActivity {
                         @Override public void onAnimationCancel(Animator animator) {}
                         @Override public void onAnimationRepeat(Animator animator) {}
                         @Override public void onAnimationEnd(Animator animator) {
+                            diagnosis.setVisibility(View.GONE);
+                            done.setImageDrawable(getDrawable(R.drawable.key));
+                            menu.setImageDrawable(getDrawable(R.drawable.menu));
                             float CurrentX = add.getX();
                             float CurrentY = add.getY();
-                            float FinalX = (data_div.getWidth())-(add.getWidth());
-                            float FinalY = (data_div.getHeight())-(add.getHeight());
                             Path path = new Path();
                             path.moveTo(CurrentX, CurrentY);
-                            path.quadTo(CurrentX*4/3, (CurrentY+FinalY)*2/5, FinalX, FinalY);
+                            path.quadTo(CurrentX*3/5, (CurrentY+fabY)*3/7, fabX, fabY);
                             startAnim = ObjectAnimator.ofFloat(add, View.X, View.Y, path);
                             startAnim.setDuration(300);
                             startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -290,6 +292,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 float CurrentX = add.getX();
                 float CurrentY = add.getY();
+                fabX=CurrentX;
+                fabY=CurrentY;
                 float FinalX = (data_div.getWidth()/2)-(add.getWidth()/2);
                 float FinalY = (data_div.getHeight()/2)-(add.getHeight()/2);
                 Path path = new Path();

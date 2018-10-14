@@ -1,17 +1,30 @@
 package com.medisyst.medisyst;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.MyViewHolder> {
     private List<Permission> permission;
@@ -57,7 +70,32 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/allow").newBuilder();
+                urlBuilder.addQueryParameter("key",item.getKey());
+                Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                        .addHeader("Content-Type", "application/json").build();
+                homeActivity.client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        Log.i("key", e.getMessage());
+                        call.cancel();
+                    }
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        assert response.body() != null;
+                        if(Integer.parseInt(Objects.requireNonNull(response.body()).string())==1 && response.isSuccessful()){
+                            Log.i("key","Request Accepted");
+                        }
+                        else{
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
 
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
         holder.reject.setOnClickListener(new View.OnClickListener() {

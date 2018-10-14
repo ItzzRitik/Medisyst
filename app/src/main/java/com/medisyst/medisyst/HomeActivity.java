@@ -134,6 +134,7 @@ public class HomeActivity extends AppCompatActivity {
                         @Override public void onAnimationEnd(Animator animator) {
                             diagnosis.setVisibility(View.GONE);
                             page_tag.setText(R.string.home);
+                            refresh.setEnabled(true);
                             done.setImageDrawable(getDrawable(R.drawable.key));
                             menu.setImageDrawable(getDrawable(R.drawable.menu));
                             float CurrentX = add.getX();
@@ -219,7 +220,7 @@ public class HomeActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-
+                        prepareHistory();
                     }
                 }
         );
@@ -309,6 +310,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override public void onAnimationRepeat(Animator animator) {}
                     @Override public void onAnimationEnd(Animator animator) {
                         page_tag.setText(R.string.diagnosis);
+                        refresh.setEnabled(false);
                         done.setImageDrawable(getDrawable(R.drawable.tick_mono));
                         menu.setImageDrawable(getDrawable(R.drawable.back));
                         diagnosis.setVisibility(View.VISIBLE);

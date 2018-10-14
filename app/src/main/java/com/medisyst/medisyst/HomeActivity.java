@@ -112,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(menu.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.back)).getConstantState()){
+                if(key==3){
                     int colorFrom = getResources().getColor(R.color.colorPrimary);
                     int colorTo = getResources().getColor(R.color.colorAccent);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
@@ -138,6 +138,7 @@ public class HomeActivity extends AppCompatActivity {
                             diagnosis.setVisibility(View.GONE);
                             page_tag.setText(R.string.home);
                             refresh.setEnabled(true);
+                            key=0;
                             done.setImageDrawable(getDrawable(R.drawable.key));
                             menu.setImageDrawable(getDrawable(R.drawable.menu));
                             float CurrentX = add.getX();
@@ -160,7 +161,7 @@ public class HomeActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.tick_mono)).getConstantState())
+                if(key==3)
                 {
                     String ID="";
                     for (Chip chip : symptom_edit.getAllChips()) {
@@ -321,6 +322,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override public void onAnimationEnd(Animator animator) {
                         page_tag.setText(R.string.diagnosis);
                         refresh.setEnabled(false);
+                        key=3;
                         done.setImageDrawable(getDrawable(R.drawable.tick_mono));
                         menu.setImageDrawable(getDrawable(R.drawable.back));
                         diagnosis.setVisibility(View.VISIBLE);

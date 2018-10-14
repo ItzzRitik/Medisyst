@@ -108,64 +108,139 @@ public class HomeActivity extends AppCompatActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(menu.getDrawable()==getDrawable(R.drawable.back)){
+                    int colorFrom = getResources().getColor(R.color.colorPrimary);
+                    int colorTo = getResources().getColor(R.color.colorAccent);
+                    ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                    colorAnimation.setDuration(300);
+                    colorAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+                    colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            diagnosis.setBackgroundColor((int) animator.getAnimatedValue());
+                        }
+                    });
 
+                    int cx = data_div.getWidth()/2;
+                    int cy = data_div.getHeight()/2;
+                    int finalRadius = Math.max(data_div.getWidth(), data_div.getHeight());
+                    animator=ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy,finalRadius, add.getWidth());
+                    animator.setDuration(300);
+                    animator.addListener(new Animator.AnimatorListener() {
+                        @Override public void onAnimationStart(Animator animator) {}
+                        @Override public void onAnimationCancel(Animator animator) {}
+                        @Override public void onAnimationRepeat(Animator animator) {}
+                        @Override public void onAnimationEnd(Animator animator) {
+                            float CurrentX = add.getX();
+                            float CurrentY = add.getY();
+                            float FinalX = (data_div.getWidth())-(add.getWidth());
+                            float FinalY = (data_div.getHeight())-(add.getHeight());
+                            Path path = new Path();
+                            path.moveTo(CurrentX, CurrentY);
+                            path.quadTo(CurrentX*4/3, (CurrentY+FinalY)*2/5, FinalX, FinalY);
+                            startAnim = ObjectAnimator.ofFloat(add, View.X, View.Y, path);
+                            startAnim.setDuration(300);
+                            startAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+                            startAnim.start();
+                        }
+                    });
+                    animator.start();
+                    colorAnimation.start();
+
+
+                    startAnim.addListener(new Animator.AnimatorListener() {
+                        @Override public void onAnimationStart(Animator animator) {}
+                        @Override public void onAnimationCancel(Animator animator) {}
+                        @Override public void onAnimationRepeat(Animator animator) {}
+                        @Override public void onAnimationEnd(Animator animator) {
+                            page_tag.setText(R.string.diagnosis);
+                            done.setImageDrawable(getDrawable(R.drawable.tick_mono));
+                            menu.setImageDrawable(getDrawable(R.drawable.back));
+                            diagnosis.setVisibility(View.VISIBLE);
+                            int cx = data_div.getWidth()/2;
+                            int cy = data_div.getHeight()/2;
+                            int finalRadius = Math.max(data_div.getWidth(), data_div.getHeight());
+                            animator=ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy, add.getWidth(), finalRadius);
+                            animator.setDuration(300);
+                            animator.start();
+
+                            int colorFrom = getResources().getColor(R.color.colorAccent);
+                            int colorTo = getResources().getColor(R.color.colorPrimary);
+                            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                            colorAnimation.setDuration(300);
+                            colorAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+                            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                                @Override
+                                public void onAnimationUpdate(ValueAnimator animator) {
+                                    diagnosis.setBackgroundColor((int) animator.getAnimatedValue());
+                                }
+                            });
+                            colorAnimation.start();
+                        }
+                    });
+
+                }
             }
         });
         done=findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ID="";
-                for (Chip chip : symptom_edit.getAllChips()) {
-                    ID=ID+sym_id[getIndex((chip.getText().toString()),symptoms)]+",";
-                }
-                ID=ID.substring(0,ID.length()-1);
-                String date=dob.getText().toString();
-                date=date.substring(date.length()-4,date.length());
-                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/diagnosis").newBuilder();
-                urlBuilder.addQueryParameter("ID",ID);
-                urlBuilder.addQueryParameter("gender",gender_tag.getText().toString());
-                urlBuilder.addQueryParameter("DOB",date);
-                Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
-                        .addHeader("Content-Type", "application/json").build();
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                        Log.w("failure", e.getMessage());
-                        call.cancel();
+                if(done.getDrawable()==getDrawable(R.drawable.tick_mono))
+                {
+                    String ID="";
+                    for (Chip chip : symptom_edit.getAllChips()) {
+                        ID=ID+sym_id[getIndex((chip.getText().toString()),symptoms)]+",";
                     }
-                    @Override
-                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                        assert response.body() != null;
-                        String mMessage = Objects.requireNonNull(response.body()).string();
-                        refresh.setRefreshing(false);
-                        if (response.isSuccessful()){
-                            try {
-                                JSONArray postsArray = new JSONArray(mMessage);
-                                Log.e("diag", postsArray.toString() );
-                                r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                                for (int i = 0; i < postsArray.length(); i++) {
-                                    JSONObject res = postsArray.getJSONObject(i);
-                                    r=r+"Disease : "+res.getString("name")+"\n";
-                                    r=r+"Professional Name : "+res.getString("profname")+"\n";
-                                    r=r+"Prediction Accuracy : "+res.getString("accuracy")+"%\n";
-                                    r=r+"Specialisation : "+res.getString("specialisation")+"\n";
+                    ID=ID.substring(0,ID.length()-1);
+                    String date=dob.getText().toString();
+                    date=date.substring(date.length()-4,date.length());
+                    HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/diagnosis").newBuilder();
+                    urlBuilder.addQueryParameter("ID",ID);
+                    urlBuilder.addQueryParameter("gender",gender_tag.getText().toString());
+                    urlBuilder.addQueryParameter("DOB",date);
+                    Request request = new Request.Builder().url(urlBuilder.build().toString()).get()
+                            .addHeader("Content-Type", "application/json").build();
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                            Log.w("failure", e.getMessage());
+                            call.cancel();
+                        }
+                        @Override
+                        public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                            assert response.body() != null;
+                            String mMessage = Objects.requireNonNull(response.body()).string();
+                            refresh.setRefreshing(false);
+                            if (response.isSuccessful()){
+                                try {
+                                    JSONArray postsArray = new JSONArray(mMessage);
+                                    Log.e("diag", postsArray.toString() );
                                     r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                                }
-                                Log.e("diag", r );
-                                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        disResult.setText(r);
+                                    for (int i = 0; i < postsArray.length(); i++) {
+                                        JSONObject res = postsArray.getJSONObject(i);
+                                        r=r+"Disease : "+res.getString("name")+"\n";
+                                        r=r+"Professional Name : "+res.getString("profname")+"\n";
+                                        r=r+"Prediction Accuracy : "+res.getString("accuracy")+"%\n";
+                                        r=r+"Specialisation : "+res.getString("specialisation")+"\n";
+                                        r=r+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
                                     }
-                                });
-                            }
-                            catch (JSONException e) {
-                                Log.w("error", e.toString());
+                                    Log.e("diag", r );
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            disResult.setText(r);
+                                        }
+                                    });
+                                }
+                                catch (JSONException e) {
+                                    Log.w("error", e.toString());
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
+
             }
         });
 
@@ -262,7 +337,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override public void onAnimationRepeat(Animator animator) {}
                     @Override public void onAnimationEnd(Animator animator) {
                         page_tag.setText(R.string.diagnosis);
-                        done.setVisibility(View.VISIBLE);
+                        done.setImageDrawable(getDrawable(R.drawable.tick_mono));
                         menu.setImageDrawable(getDrawable(R.drawable.back));
                         diagnosis.setVisibility(View.VISIBLE);
                         int cx = data_div.getWidth()/2;

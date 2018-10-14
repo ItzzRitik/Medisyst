@@ -30,8 +30,7 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.My
     private List<Permission> permission;
     private HomeActivity homeActivity;
     private Random random;
-    private int[] thumb={R.drawable.h1,R.drawable.h2,R.drawable.h3,R.drawable.h4,
-            R.drawable.h5,R.drawable.h6,R.drawable.h7,R.drawable.h8};
+    private int[] thumb={R.drawable.d1,R.drawable.d2,R.drawable.d3,R.drawable.d4,R.drawable.d5,R.drawable.d6};
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name,key,accept,reject;
         LinearLayout cardItem;

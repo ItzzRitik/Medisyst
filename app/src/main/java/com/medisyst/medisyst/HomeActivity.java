@@ -463,6 +463,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         //Generating Symptom Array
+        display.setAdapter(null);
         if(key==0)
         {
             Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
@@ -537,7 +538,7 @@ public class HomeActivity extends AppCompatActivity {
                             });
                         }
                         catch (JSONException e) {
-                            Log.w("error", e.toString());
+                            Log.w("error1234", e.toString());
                         }
                     }
                 }

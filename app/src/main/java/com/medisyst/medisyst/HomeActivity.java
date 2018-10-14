@@ -478,8 +478,7 @@ public class HomeActivity extends AppCompatActivity {
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms);
-                                symptom_edit.setAdapter(adapter);
+                                symptom_edit.setAdapter(new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms));
                             }
                         });
                     }
@@ -519,7 +518,6 @@ public class HomeActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 display.setAdapter(new HistoryAdapter(HomeActivity.this,history));
-                                symptom_edit.setAdapter(new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_dropdown_item_1line, symptoms));
                             }
                         });
                     }

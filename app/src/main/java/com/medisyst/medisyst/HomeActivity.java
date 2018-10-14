@@ -463,6 +463,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         Email=(getIntent().getStringExtra("email")).trim();
+        display.setAdapter(null);
         //Generating Symptom Array
         if(key==0)
         {

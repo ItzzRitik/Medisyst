@@ -217,11 +217,13 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 else if(key==0)
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.close));key=1;prepareHistory();
+                    done.setImageDrawable(getDrawable(R.drawable.close));key=1;
+                    page_tag.setText(R.string.request);prepareHistory();
                 }
                 else if(key==1)
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.key));key=0;prepareHistory();
+                    done.setImageDrawable(getDrawable(R.drawable.key));key=0;
+                    page_tag.setText(R.string.home);prepareHistory();
                 }
             }
         });

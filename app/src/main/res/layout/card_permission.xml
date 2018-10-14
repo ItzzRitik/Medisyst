@@ -48,7 +48,7 @@
                 android:layout_marginBottom="0dp"/>
             <TextView
                 android:layout_width="80dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/accept"
@@ -58,11 +58,11 @@
                 android:background="@drawable/signin_green"/>
             <TextView
                 android:layout_width="80dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:id="@+id/reject"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="80dp"
+                android:layout_marginEnd="90dp"
                 android:text="@string/reject"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"

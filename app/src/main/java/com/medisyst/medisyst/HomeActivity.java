@@ -218,12 +218,13 @@ public class HomeActivity extends AppCompatActivity {
                 else if(key==0)
                 {
                     done.setImageDrawable(getDrawable(R.drawable.close));key=1;
-                    refresh.setRefreshing(true);
+                    listRefresh();
                     page_tag.setText(R.string.request);prepareHistory();
                 }
                 else if(key==1)
                 {
                     done.setImageDrawable(getDrawable(R.drawable.key));key=0;
+                    listRefresh();
                     page_tag.setText(R.string.home);prepareHistory();
                 }
             }
@@ -438,6 +439,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
         return -1;
+    }
+    public void listRefresh(){
+        refresh.post(new Runnable() {
+            @Override
+            public void run() {
+                refresh.setRefreshing(true);
+            }
+        });
     }
     public void prepareHistory(){
         //Generating Symptom Array

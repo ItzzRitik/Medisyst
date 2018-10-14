@@ -85,6 +85,7 @@ public class HomeActivity extends AppCompatActivity {
     String r="",Email;
     NachoTextView symptom_edit;
     String symptoms[],sym_id[];
+    int key=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,13 +214,13 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     });
                 }
-                else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState())
+                else if(key==0)
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.close));prepareHistory(false);
+                    done.setImageDrawable(getDrawable(R.drawable.close));prepareHistory();key=1;
                 }
-                else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.close)).getConstantState())
+                else if(key==1)
                 {
-                    done.setImageDrawable(getDrawable(R.drawable.key));prepareHistory(false);
+                    done.setImageDrawable(getDrawable(R.drawable.key));prepareHistory();key=0;
                 }
             }
         });
@@ -229,7 +230,7 @@ public class HomeActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        prepareHistory(false);
+                        prepareHistory();
                     }
                 }
         );
@@ -422,7 +423,7 @@ public class HomeActivity extends AppCompatActivity {
                         }},800);
 
                 }},1500);
-            prepareHistory(true);
+            prepareHistory();
         }
     }
     public int getIndex(String element,String arr[]){
@@ -433,10 +434,10 @@ public class HomeActivity extends AppCompatActivity {
         }
         return -1;
     }
-    public void prepareHistory(Boolean hist){
+    public void prepareHistory(){
         //Generating Symptom Array
         Toast.makeText(this, "History Started", Toast.LENGTH_SHORT).show();
-        if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState() || hist)
+        if(key==0)
         {
             Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
             Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
@@ -515,7 +516,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
         }
-        else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.close)).getConstantState())
+        else if(key==1)
         {
             HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/KEY").newBuilder();
             urlBuilder.addQueryParameter("email","Aditya@gmail.com");

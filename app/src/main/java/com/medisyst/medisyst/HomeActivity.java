@@ -370,6 +370,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if(getIntent().getBooleanExtra("isProfile",false))
         {
+            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
             splash_cover.setVisibility(View.GONE);
             logo_div.setVisibility(View.VISIBLE);
             done.setVisibility(View.VISIBLE);
@@ -384,6 +385,7 @@ public class HomeActivity extends AppCompatActivity {
                 }},800);
         }
         else{
+            Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

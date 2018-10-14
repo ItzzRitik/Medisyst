@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(menu.getDrawable().getConstantState()==getDrawable(R.drawable.back).getConstantState()){
+                if(menu.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.back)).getConstantState()){
                     int colorFrom = getResources().getColor(R.color.colorPrimary);
                     int colorTo = getResources().getColor(R.color.colorAccent);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(done.getDrawable().getConstantState()==getDrawable(R.drawable.tick_mono).getConstantState())
+                if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.tick_mono)).getConstantState())
                 {
                     String ID="";
                     for (Chip chip : symptom_edit.getAllChips()) {
@@ -211,6 +211,10 @@ public class HomeActivity extends AppCompatActivity {
                             }
                         }
                     });
+                }
+                else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState())
+                {
+                    done.setImageDrawable(getDrawable(R.drawable.close));
                 }
 
             }
@@ -427,7 +431,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         //Generating Symptom Array
-        if(done.getDrawable().getConstantState()==getDrawable(R.drawable.key).getConstantState())
+        if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.key)).getConstantState())
         {
             Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
                     .addHeader("Content-Type", "application/json").build();
@@ -505,7 +509,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
         }
-        else if(done.getDrawable().getConstantState()==getDrawable(R.drawable.close).getConstantState())
+        else if(done.getDrawable().getConstantState()==Objects.requireNonNull(getDrawable(R.drawable.close)).getConstantState())
         {
             HttpUrl.Builder urlBuilder = HttpUrl.parse("https://medisyst-adityabhardwaj.c9users.io/KEY").newBuilder();
             urlBuilder.addQueryParameter("email","Aditya@gmail.com");

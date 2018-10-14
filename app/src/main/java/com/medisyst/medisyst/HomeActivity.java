@@ -450,11 +450,8 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void prepareHistory(){
         //Generating Symptom Array
-        Toast.makeText(this, "History Started", Toast.LENGTH_SHORT).show();
         if(key==0)
-        {
-            Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
-            Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
+        { Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/symptoms").get()
                     .addHeader("Content-Type", "application/json").build();
             client.newCall(request).enqueue(new Callback() {
                 @Override

@@ -108,7 +108,7 @@ public class HomeActivity extends AppCompatActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(menu.getDrawable()==getDrawable(R.drawable.back)){
+                if(menu.getDrawable().getConstantState()==getDrawable(R.drawable.back).getConstantState()){
                     int colorFrom = getResources().getColor(R.color.colorPrimary);
                     int colorTo = getResources().getColor(R.color.colorAccent);
                     ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
@@ -146,39 +146,6 @@ public class HomeActivity extends AppCompatActivity {
                     });
                     animator.start();
                     colorAnimation.start();
-
-
-                    startAnim.addListener(new Animator.AnimatorListener() {
-                        @Override public void onAnimationStart(Animator animator) {}
-                        @Override public void onAnimationCancel(Animator animator) {}
-                        @Override public void onAnimationRepeat(Animator animator) {}
-                        @Override public void onAnimationEnd(Animator animator) {
-                            page_tag.setText(R.string.diagnosis);
-                            done.setImageDrawable(getDrawable(R.drawable.tick_mono));
-                            menu.setImageDrawable(getDrawable(R.drawable.back));
-                            diagnosis.setVisibility(View.VISIBLE);
-                            int cx = data_div.getWidth()/2;
-                            int cy = data_div.getHeight()/2;
-                            int finalRadius = Math.max(data_div.getWidth(), data_div.getHeight());
-                            animator=ViewAnimationUtils.createCircularReveal(diagnosis, cx, cy, add.getWidth(), finalRadius);
-                            animator.setDuration(300);
-                            animator.start();
-
-                            int colorFrom = getResources().getColor(R.color.colorAccent);
-                            int colorTo = getResources().getColor(R.color.colorPrimary);
-                            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-                            colorAnimation.setDuration(300);
-                            colorAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-                            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                @Override
-                                public void onAnimationUpdate(ValueAnimator animator) {
-                                    diagnosis.setBackgroundColor((int) animator.getAnimatedValue());
-                                }
-                            });
-                            colorAnimation.start();
-                        }
-                    });
-
                 }
             }
         });
@@ -186,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(done.getDrawable()==getDrawable(R.drawable.tick_mono))
+                if(done.getDrawable().getConstantState()==getDrawable(R.drawable.tick_mono).getConstantState())
                 {
                     String ID="";
                     for (Chip chip : symptom_edit.getAllChips()) {

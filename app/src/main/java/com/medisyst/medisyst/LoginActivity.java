@@ -313,6 +313,7 @@ public class LoginActivity extends AppCompatActivity {
                             appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
                             appNameSplash.setText(getString(R.string.app_name));
                             appNameSplash.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

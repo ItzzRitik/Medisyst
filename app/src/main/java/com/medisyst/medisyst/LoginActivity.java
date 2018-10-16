@@ -289,13 +289,13 @@ public class LoginActivity extends AppCompatActivity {
         splash(0);
     }
     public void splash(final int iteration){
-        Log.i("servercall", "Connecting - "+iteration);
+        Log.i("backend_call", "Connecting - "+iteration);
         Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/connection").get()
                 .addHeader("Content-Type", "application/json").build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.i("servercall", "Connection Failed - "+iteration);
+                Log.i("backend_call", "Connection Failed - "+iteration);
                 call.cancel();
             }
             @Override
@@ -303,7 +303,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("servercall","Server Response - "+iteration+" => "+response.message());
+                        Log.i("backend_call","Server Response - "+iteration+" => "+response.message());
                         if(response.code()==503)
                         {
                             if(iteration==0){

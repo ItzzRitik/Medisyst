@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         client = new OkHttpClient();
 
         appNameSplash=findViewById(R.id.appNameSplash);
-        appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
+        appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
 
         forget_create=findViewById(R.id.forget_create);
         forget_create.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
@@ -307,6 +307,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                         else {
+                            appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
+                            appNameSplash.setText(getString(R.string.app_name));
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

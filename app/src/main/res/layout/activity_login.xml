@@ -47,19 +47,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/offline"
-            android:textAllCaps="true"
-            android:textSize="17sp"
+            android:textSize="12sp"
             android:id="@+id/appNameSplash"
             android:textStyle="bold"
             android:visibility="gone"
-            android:singleLine="false"
+            android:singleLine="true"
+            android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"/>
         <ProgressBar
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/appNameSplash"
             android:layout_marginBottom="60dp"
             android:layout_centerHorizontal="true"/>
         <RelativeLayout

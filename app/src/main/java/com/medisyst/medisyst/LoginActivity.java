@@ -292,31 +292,37 @@ public class LoginActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.i("connection", "Connection Failed");
+                Log.i("server connection", "Connection Failed");
                 call.cancel();
             }
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("connection","Connection Established");
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Splash Animation
-                                splash_cover.setVisibility(View.GONE);logo_div.setVisibility(View.VISIBLE);
-                                logo_div.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal));
+                        Log.i("server connection","Server Response => "+response.message());
+                        if(response.code()==503)
+                        {
 
-                                anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
-                                anim.setDuration(550);ico_splash.startAnimation(anim);
+                        }
+                        else {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Splash Animation
+                                    splash_cover.setVisibility(View.GONE);logo_div.setVisibility(View.VISIBLE);
+                                    logo_div.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_reveal));
 
-                                new Handler().postDelayed(new Runnable() {@Override public void run() {
+                                    anim=AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_trans);
+                                    anim.setDuration(550);ico_splash.startAnimation(anim);
+
                                     new Handler().postDelayed(new Runnable() {@Override public void run() {
-                                        scaleY(login_div,48,400,new OvershootInterpolator());}},200);
-                                    scaleY(social_div,80,280,new AccelerateInterpolator());
-                                }},800);
-                            }},2000);
+                                        new Handler().postDelayed(new Runnable() {@Override public void run() {
+                                            scaleY(login_div,48,400,new OvershootInterpolator());}},200);
+                                        scaleY(social_div,80,280,new AccelerateInterpolator());
+                                    }},800);
+                                }},2000);
+                        }
                     }
                 });
             }

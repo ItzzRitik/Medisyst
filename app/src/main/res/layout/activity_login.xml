@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/offline"
-            android:textSize="12sp"
+            android:textSize="0sp"
             android:id="@+id/appNameSplash"
             android:textStyle="bold"
             android:singleLine="true"
@@ -59,7 +59,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_above="@+id/appNameSplash"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="15dp"
             android:layout_centerHorizontal="true"/>
         <RelativeLayout
             android:layout_width="match_parent"

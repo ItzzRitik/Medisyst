@@ -303,7 +303,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         Log.i("servercall","Server Response => "+response.message());
                         new Handler().postDelayed(new Runnable() {@Override public void run() {
-                            appNameSplash.setVisibility(View.VISIBLE);
+                            appNameSplash.setTextSize(TypedValue.COMPLEX_UNIT_PX,12);
                         }},1000);
                         if(response.code()==503)
                         {
@@ -312,6 +312,7 @@ public class LoginActivity extends AppCompatActivity {
                         else {
                             appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
                             appNameSplash.setText(getString(R.string.app_name));
+                            appNameSplash.setTextSize(TypedValue.COMPLEX_UNIT_PX,12);
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

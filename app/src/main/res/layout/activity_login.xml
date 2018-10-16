@@ -51,6 +51,7 @@
             android:textSize="17sp"
             android:id="@+id/appNameSplash"
             android:textStyle="bold"
+            android:visibility="gone"
             android:singleLine="false"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -58,8 +59,8 @@
         <ProgressBar
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_above="@+id/appNameSplash"
-            android:layout_marginBottom="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
             android:layout_centerHorizontal="true"/>
         <RelativeLayout
             android:layout_width="match_parent"

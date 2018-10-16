@@ -50,7 +50,6 @@
             android:textSize="12sp"
             android:id="@+id/appNameSplash"
             android:textStyle="bold"
-            android:visibility="gone"
             android:singleLine="true"
             android:gravity="center"
             android:layout_alignParentBottom="true"

@@ -313,7 +313,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             new Handler().postDelayed(new Runnable() {@Override public void run() {
                                 splash(iteration+1);
-                            }},3000);
+                            }},iteration*1000);
                         }
                         else {
                             appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));

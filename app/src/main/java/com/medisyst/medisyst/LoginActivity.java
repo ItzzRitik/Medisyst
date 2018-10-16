@@ -303,7 +303,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("server connection","Server Response => "+response.message());
                         if(response.code()==503)
                         {
-
+                            Toast.makeText(LoginActivity.this, "Server Offline", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             new Handler().postDelayed(new Runnable() {

@@ -287,12 +287,13 @@ public class LoginActivity extends AppCompatActivity {
         splash();
     }
     public void splash(){
+        Log.i("server", "Connecting");
         Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/connection").get()
                 .addHeader("Content-Type", "application/json").build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.i("server connection", "Connection Failed");
+                Log.i("server", "Connection Failed");
                 call.cancel();
             }
             @Override
@@ -300,10 +301,10 @@ public class LoginActivity extends AppCompatActivity {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("server connection","Server Response => "+response.message());
+                        Log.i("server","Server Response => "+response.message());
                         if(response.code()==503)
                         {
-                            Toast.makeText(LoginActivity.this, "Server Offline", Toast.LENGTH_SHORT).show();
+
                         }
                         else {
                             new Handler().postDelayed(new Runnable() {

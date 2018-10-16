@@ -302,7 +302,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Log.i("server","Server Response => "+response.message());
-                        appNameSplash.setVisibility(View.VISIBLE);
+                        new Handler().postDelayed(new Runnable() {@Override public void run() {
+                            appNameSplash.setVisibility(View.VISIBLE);
+                        }},1000);
                         if(response.code()==503)
                         {
 

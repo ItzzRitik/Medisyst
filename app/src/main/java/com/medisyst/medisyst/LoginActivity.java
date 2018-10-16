@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Looper;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     int log=0;
     String buttonText="NEXT";
     OkHttpClient client;
-    ProgressBar nextLoad;
+    ProgressBar nextLoad,proSplash;
     TextView appNameSplash;
     @Override
     public void onBackPressed() {
@@ -92,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
         appNameSplash=findViewById(R.id.appNameSplash);
         appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
+        proSplash=findViewById(R.id.proSplash);
 
         forget_create=findViewById(R.id.forget_create);
         forget_create.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/exo2.ttf"));
@@ -284,16 +286,16 @@ public class LoginActivity extends AppCompatActivity {
 
         setButtonEnabled(false);logo_div.setVisibility(View.VISIBLE);
         ico_splash.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_initialgrow));
-        splash();
+        splash(0);
     }
-    public void splash(){
-        Log.i("servercall", "Connecting");
+    public void splash(final int iteration){
+        Log.i("servercall", "Connecting - "+iteration);
         Request request = new Request.Builder().url("https://medisyst-adityabhardwaj.c9users.io/connection").get()
                 .addHeader("Content-Type", "application/json").build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.i("servercall", "Connection Failed");
+                Log.i("servercall", "Connection Failed - "+iteration);
                 call.cancel();
             }
             @Override
@@ -301,19 +303,23 @@ public class LoginActivity extends AppCompatActivity {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("servercall","Server Response => "+response.message());
-                        new Handler().postDelayed(new Runnable() {@Override public void run() {
-                            appNameSplash.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
-                        }},1000);
+                        Log.i("servercall","Server Response - "+iteration+" => "+response.message());
                         if(response.code()==503)
                         {
-
+                            if(iteration==0){
+                                new Handler().postDelayed(new Runnable() {@Override public void run() {
+                                    appNameSplash.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
+                                }},1000);
+                            }
+                            new Handler().postDelayed(new Runnable() {@Override public void run() {
+                                splash(iteration+1);
+                            }},3000);
                         }
                         else {
                             appNameSplash.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/vdub.ttf"));
                             appNameSplash.setText(getString(R.string.app_name));
                             appNameSplash.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
-
+                            proSplash.setVisibility(View.GONE);
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

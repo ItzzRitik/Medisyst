@@ -50,6 +50,7 @@
             android:textSize="0sp"
             android:id="@+id/appNameSplash"
             android:textStyle="bold"
+            android:textColor="@color/profile"
             android:singleLine="true"
             android:gravity="center"
             android:layout_alignParentBottom="true"
@@ -58,6 +59,7 @@
         <ProgressBar
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:id="@+id/proSplash"
             android:layout_above="@+id/appNameSplash"
             android:layout_marginBottom="10dp"
             android:layout_centerHorizontal="true"/>
